@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Switch } from '@/components/ui/switch';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Switch } from "@/components/ui/switch";
 import {
   Users,
   Plus,
@@ -30,176 +49,242 @@ import {
   Crown,
   User,
   CheckCircle,
-  XCircle
-} from 'lucide-react';
+  XCircle,
+} from "lucide-react";
 
 const employees = [
   {
-    id: 'EMP001',
-    name: 'Sarah Wilson',
-    email: 'sarah.wilson@company.com',
-    phone: '+1 (555) 123-4567',
-    avatar: '/placeholder.svg',
-    department: 'Engineering',
-    role: 'Senior Developer',
-    level: 'Senior',
-    manager: 'Emily Davis',
-    location: 'San Francisco, CA',
-    startDate: '2022-03-15',
-    status: 'active',
-    permissions: ['time_tracking', 'project_access', 'report_viewing'],
-    lastActive: '2024-12-18T10:30:00'
+    id: "EMP001",
+    name: "Sarah Wilson",
+    email: "sarah.wilson@company.com",
+    phone: "+1 (555) 123-4567",
+    avatar: "/placeholder.svg",
+    department: "Engineering",
+    role: "Senior Developer",
+    level: "Senior",
+    manager: "Emily Davis",
+    location: "San Francisco, CA",
+    startDate: "2022-03-15",
+    status: "active",
+    permissions: ["time_tracking", "project_access", "report_viewing"],
+    lastActive: "2024-12-18T10:30:00",
   },
   {
-    id: 'EMP002',
-    name: 'Mike Chen',
-    email: 'mike.chen@company.com',
-    phone: '+1 (555) 234-5678',
-    avatar: '/placeholder.svg',
-    department: 'Design',
-    role: 'UI/UX Designer',
-    level: 'Mid',
-    manager: 'Emily Davis',
-    location: 'Remote',
-    startDate: '2023-01-20',
-    status: 'active',
-    permissions: ['time_tracking', 'project_access'],
-    lastActive: '2024-12-18T09:15:00'
+    id: "EMP002",
+    name: "Mike Chen",
+    email: "mike.chen@company.com",
+    phone: "+1 (555) 234-5678",
+    avatar: "/placeholder.svg",
+    department: "Design",
+    role: "UI/UX Designer",
+    level: "Mid",
+    manager: "Emily Davis",
+    location: "Remote",
+    startDate: "2023-01-20",
+    status: "active",
+    permissions: ["time_tracking", "project_access"],
+    lastActive: "2024-12-18T09:15:00",
   },
   {
-    id: 'EMP003',
-    name: 'Emily Davis',
-    email: 'emily.davis@company.com',
-    phone: '+1 (555) 345-6789',
-    avatar: '/placeholder.svg',
-    department: 'Management',
-    role: 'Engineering Manager',
-    level: 'Manager',
+    id: "EMP003",
+    name: "Emily Davis",
+    email: "emily.davis@company.com",
+    phone: "+1 (555) 345-6789",
+    avatar: "/placeholder.svg",
+    department: "Management",
+    role: "Engineering Manager",
+    level: "Manager",
     manager: null,
-    location: 'San Francisco, CA',
-    startDate: '2021-08-10',
-    status: 'active',
-    permissions: ['time_tracking', 'project_access', 'report_viewing', 'user_management', 'approval_authority'],
-    lastActive: '2024-12-18T11:20:00'
+    location: "San Francisco, CA",
+    startDate: "2021-08-10",
+    status: "active",
+    permissions: [
+      "time_tracking",
+      "project_access",
+      "report_viewing",
+      "user_management",
+      "approval_authority",
+    ],
+    lastActive: "2024-12-18T11:20:00",
   },
   {
-    id: 'EMP004',
-    name: 'Tom Johnson',
-    email: 'tom.johnson@company.com',
-    phone: '+1 (555) 456-7890',
-    avatar: '/placeholder.svg',
-    department: 'Engineering',
-    role: 'Junior Developer',
-    level: 'Junior',
-    manager: 'Emily Davis',
-    location: 'Austin, TX',
-    startDate: '2023-09-01',
-    status: 'active',
-    permissions: ['time_tracking', 'project_access'],
-    lastActive: '2024-12-18T08:45:00'
+    id: "EMP004",
+    name: "Tom Johnson",
+    email: "tom.johnson@company.com",
+    phone: "+1 (555) 456-7890",
+    avatar: "/placeholder.svg",
+    department: "Engineering",
+    role: "Junior Developer",
+    level: "Junior",
+    manager: "Emily Davis",
+    location: "Austin, TX",
+    startDate: "2023-09-01",
+    status: "active",
+    permissions: ["time_tracking", "project_access"],
+    lastActive: "2024-12-18T08:45:00",
   },
   {
-    id: 'EMP005',
-    name: 'Lisa Brown',
-    email: 'lisa.brown@company.com',
-    phone: '+1 (555) 567-8901',
-    avatar: '/placeholder.svg',
-    department: 'HR',
-    role: 'HR Specialist',
-    level: 'Mid',
-    manager: 'John Smith',
-    location: 'New York, NY',
-    startDate: '2022-11-15',
-    status: 'inactive',
-    permissions: ['time_tracking', 'user_management'],
-    lastActive: '2024-12-15T16:30:00'
-  }
+    id: "EMP005",
+    name: "Lisa Brown",
+    email: "lisa.brown@company.com",
+    phone: "+1 (555) 567-8901",
+    avatar: "/placeholder.svg",
+    department: "HR",
+    role: "HR Specialist",
+    level: "Mid",
+    manager: "John Smith",
+    location: "New York, NY",
+    startDate: "2022-11-15",
+    status: "inactive",
+    permissions: ["time_tracking", "user_management"],
+    lastActive: "2024-12-15T16:30:00",
+  },
 ];
 
 const departments = [
   {
-    id: 'eng',
-    name: 'Engineering',
-    manager: 'Emily Davis',
+    id: "eng",
+    name: "Engineering",
+    manager: "Emily Davis",
     employeeCount: 8,
     budget: 850000,
-    description: 'Software development and technical operations'
+    description: "Software development and technical operations",
   },
   {
-    id: 'design',
-    name: 'Design',
-    manager: 'Alex Johnson',
+    id: "design",
+    name: "Design",
+    manager: "Alex Johnson",
     employeeCount: 4,
     budget: 320000,
-    description: 'User experience and visual design'
+    description: "User experience and visual design",
   },
   {
-    id: 'hr',
-    name: 'Human Resources',
-    manager: 'John Smith',
+    id: "hr",
+    name: "Human Resources",
+    manager: "John Smith",
     employeeCount: 3,
     budget: 240000,
-    description: 'People operations and talent management'
+    description: "People operations and talent management",
   },
   {
-    id: 'management',
-    name: 'Management',
-    manager: 'CEO',
+    id: "management",
+    name: "Management",
+    manager: "CEO",
     employeeCount: 2,
     budget: 450000,
-    description: 'Executive leadership and strategic planning'
-  }
+    description: "Executive leadership and strategic planning",
+  },
 ];
 
 const roles = [
-  { id: 'admin', name: 'Administrator', level: 'high', permissions: ['all'] },
-  { id: 'manager', name: 'Manager', level: 'high', permissions: ['user_management', 'approval_authority', 'report_viewing', 'time_tracking', 'project_access'] },
-  { id: 'supervisor', name: 'Supervisor', level: 'medium', permissions: ['approval_authority', 'report_viewing', 'time_tracking', 'project_access'] },
-  { id: 'employee', name: 'Employee', level: 'low', permissions: ['time_tracking', 'project_access'] }
+  { id: "admin", name: "Administrator", level: "high", permissions: ["all"] },
+  {
+    id: "manager",
+    name: "Manager",
+    level: "high",
+    permissions: [
+      "user_management",
+      "approval_authority",
+      "report_viewing",
+      "time_tracking",
+      "project_access",
+    ],
+  },
+  {
+    id: "supervisor",
+    name: "Supervisor",
+    level: "medium",
+    permissions: [
+      "approval_authority",
+      "report_viewing",
+      "time_tracking",
+      "project_access",
+    ],
+  },
+  {
+    id: "employee",
+    name: "Employee",
+    level: "low",
+    permissions: ["time_tracking", "project_access"],
+  },
 ];
 
 const permissions = [
-  { id: 'time_tracking', name: 'Time Tracking', description: 'Clock in/out and manage timesheets' },
-  { id: 'project_access', name: 'Project Access', description: 'View and work on assigned projects' },
-  { id: 'report_viewing', name: 'Report Viewing', description: 'Access attendance and productivity reports' },
-  { id: 'user_management', name: 'User Management', description: 'Manage employee accounts and profiles' },
-  { id: 'approval_authority', name: 'Approval Authority', description: 'Approve leave requests and timesheets' },
-  { id: 'system_settings', name: 'System Settings', description: 'Configure system-wide settings' }
+  {
+    id: "time_tracking",
+    name: "Time Tracking",
+    description: "Clock in/out and manage timesheets",
+  },
+  {
+    id: "project_access",
+    name: "Project Access",
+    description: "View and work on assigned projects",
+  },
+  {
+    id: "report_viewing",
+    name: "Report Viewing",
+    description: "Access attendance and productivity reports",
+  },
+  {
+    id: "user_management",
+    name: "User Management",
+    description: "Manage employee accounts and profiles",
+  },
+  {
+    id: "approval_authority",
+    name: "Approval Authority",
+    description: "Approve leave requests and timesheets",
+  },
+  {
+    id: "system_settings",
+    name: "System Settings",
+    description: "Configure system-wide settings",
+  },
 ];
 
 export default function TeamManagement() {
-  const [selectedTab, setSelectedTab] = useState('directory');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
-  const [selectedRole, setSelectedRole] = useState('all');
+  const [selectedTab, setSelectedTab] = useState("directory");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [selectedRole, setSelectedRole] = useState("all");
   const [isAddEmployeeOpen, setIsAddEmployeeOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const filteredEmployees = employees.filter(emp => 
-    (selectedDepartment === 'all' || emp.department === selectedDepartment) &&
-    (selectedRole === 'all' || emp.level === selectedRole) &&
-    (searchTerm === '' || 
-     emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-     emp.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-     emp.role.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredEmployees = employees.filter(
+    (emp) =>
+      (selectedDepartment === "all" || emp.department === selectedDepartment) &&
+      (selectedRole === "all" || emp.level === selectedRole) &&
+      (searchTerm === "" ||
+        emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        emp.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        emp.role.toLowerCase().includes(searchTerm.toLowerCase())),
   );
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'active': return 'bg-success';
-      case 'inactive': return 'bg-muted';
-      case 'suspended': return 'bg-destructive';
-      default: return 'bg-muted';
+      case "active":
+        return "bg-success";
+      case "inactive":
+        return "bg-muted";
+      case "suspended":
+        return "bg-destructive";
+      default:
+        return "bg-muted";
     }
   };
 
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Manager': return 'bg-purple-500';
-      case 'Senior': return 'bg-blue-500';
-      case 'Mid': return 'bg-green-500';
-      case 'Junior': return 'bg-orange-500';
-      default: return 'bg-muted';
+      case "Manager":
+        return "bg-purple-500";
+      case "Senior":
+        return "bg-blue-500";
+      case "Mid":
+        return "bg-green-500";
+      case "Junior":
+        return "bg-orange-500";
+      default:
+        return "bg-muted";
     }
   };
 
@@ -239,7 +324,11 @@ export default function TeamManagement() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="emp-email">Email</Label>
-                  <Input id="emp-email" type="email" placeholder="john.doe@company.com" />
+                  <Input
+                    id="emp-email"
+                    type="email"
+                    placeholder="john.doe@company.com"
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="emp-phone">Phone</Label>
@@ -285,11 +374,13 @@ export default function TeamManagement() {
                       <SelectValue placeholder="Select manager" />
                     </SelectTrigger>
                     <SelectContent>
-                      {employees.filter(emp => emp.level === 'Manager').map((manager) => (
-                        <SelectItem key={manager.id} value={manager.id}>
-                          {manager.name}
-                        </SelectItem>
-                      ))}
+                      {employees
+                        .filter((emp) => emp.level === "Manager")
+                        .map((manager) => (
+                          <SelectItem key={manager.id} value={manager.id}>
+                            {manager.name}
+                          </SelectItem>
+                        ))}
                     </SelectContent>
                   </Select>
                 </div>
@@ -299,7 +390,10 @@ export default function TeamManagement() {
                 </div>
               </div>
               <div className="flex justify-end gap-2 pt-4">
-                <Button variant="outline" onClick={() => setIsAddEmployeeOpen(false)}>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsAddEmployeeOpen(false)}
+                >
                   Cancel
                 </Button>
                 <Button onClick={() => setIsAddEmployeeOpen(false)}>
@@ -333,11 +427,14 @@ export default function TeamManagement() {
                     className="w-64"
                   />
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <Filter className="h-4 w-4 text-muted-foreground" />
                   <Label htmlFor="dept-filter">Department:</Label>
-                  <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
+                  <Select
+                    value={selectedDepartment}
+                    onValueChange={setSelectedDepartment}
+                  >
                     <SelectTrigger className="w-40">
                       <SelectValue />
                     </SelectTrigger>
@@ -373,17 +470,24 @@ export default function TeamManagement() {
           {/* Employee Grid */}
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredEmployees.map((employee) => (
-              <Card key={employee.id} className="hover:shadow-md transition-shadow">
+              <Card
+                key={employee.id}
+                className="hover:shadow-md transition-shadow"
+              >
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <Avatar className="h-12 w-12">
                         <AvatarImage src={employee.avatar} />
-                        <AvatarFallback>{employee.name.slice(0, 2)}</AvatarFallback>
+                        <AvatarFallback>
+                          {employee.name.slice(0, 2)}
+                        </AvatarFallback>
                       </Avatar>
                       <div>
                         <h3 className="font-semibold">{employee.name}</h3>
-                        <p className="text-sm text-muted-foreground">{employee.role}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {employee.role}
+                        </p>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm">
@@ -395,7 +499,9 @@ export default function TeamManagement() {
                     <div className="flex items-center gap-2">
                       <Building className="h-4 w-4 text-muted-foreground" />
                       <span className="text-sm">{employee.department}</span>
-                      <Badge className={`${getLevelColor(employee.level)} text-white text-xs`}>
+                      <Badge
+                        className={`${getLevelColor(employee.level)} text-white text-xs`}
+                      >
                         {employee.level}
                       </Badge>
                     </div>
@@ -412,11 +518,15 @@ export default function TeamManagement() {
 
                     <div className="flex items-center gap-2">
                       <User className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">Reports to: {employee.manager || 'CEO'}</span>
+                      <span className="text-sm">
+                        Reports to: {employee.manager || "CEO"}
+                      </span>
                     </div>
 
                     <div className="flex items-center justify-between pt-2 border-t">
-                      <Badge className={`${getStatusColor(employee.status)} text-white`}>
+                      <Badge
+                        className={`${getStatusColor(employee.status)} text-white`}
+                      >
                         {employee.status}
                       </Badge>
                       <div className="flex gap-1">
@@ -442,7 +552,8 @@ export default function TeamManagement() {
             <CardHeader>
               <CardTitle>Organizational Hierarchy</CardTitle>
               <CardDescription>
-                Visual representation of team structure and reporting relationships
+                Visual representation of team structure and reporting
+                relationships
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -453,7 +564,9 @@ export default function TeamManagement() {
                     <Crown className="h-6 w-6 text-primary" />
                     <div>
                       <h3 className="font-semibold">CEO</h3>
-                      <p className="text-sm text-muted-foreground">Chief Executive Officer</p>
+                      <p className="text-sm text-muted-foreground">
+                        Chief Executive Officer
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -468,7 +581,9 @@ export default function TeamManagement() {
                         <Building className="h-5 w-5 text-muted-foreground" />
                         <h4 className="font-medium">{dept.name}</h4>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-3">{dept.manager}</p>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        {dept.manager}
+                      </p>
                       <Badge variant="outline" className="text-xs">
                         {dept.employeeCount} employees
                       </Badge>
@@ -477,17 +592,34 @@ export default function TeamManagement() {
                     {/* Direct Reports */}
                     <div className="mt-4 space-y-2">
                       {employees
-                        .filter(emp => emp.department === dept.name && emp.level !== 'Manager')
+                        .filter(
+                          (emp) =>
+                            emp.department === dept.name &&
+                            emp.level !== "Manager",
+                        )
                         .slice(0, 3)
                         .map((emp) => (
-                          <div key={emp.id} className="p-2 border rounded text-xs bg-background">
+                          <div
+                            key={emp.id}
+                            className="p-2 border rounded text-xs bg-background"
+                          >
                             <p className="font-medium">{emp.name}</p>
                             <p className="text-muted-foreground">{emp.role}</p>
                           </div>
                         ))}
-                      {employees.filter(emp => emp.department === dept.name && emp.level !== 'Manager').length > 3 && (
+                      {employees.filter(
+                        (emp) =>
+                          emp.department === dept.name &&
+                          emp.level !== "Manager",
+                      ).length > 3 && (
                         <p className="text-xs text-muted-foreground">
-                          +{employees.filter(emp => emp.department === dept.name && emp.level !== 'Manager').length - 3} more
+                          +
+                          {employees.filter(
+                            (emp) =>
+                              emp.department === dept.name &&
+                              emp.level !== "Manager",
+                          ).length - 3}{" "}
+                          more
                         </p>
                       )}
                     </div>
@@ -501,7 +633,9 @@ export default function TeamManagement() {
         <TabsContent value="departments" className="space-y-6">
           <div className="grid gap-6 md:grid-cols-2">
             {departments.map((dept) => {
-              const deptEmployees = employees.filter(emp => emp.department === dept.name);
+              const deptEmployees = employees.filter(
+                (emp) => emp.department === dept.name,
+              );
               return (
                 <Card key={dept.id}>
                   <CardHeader>
@@ -521,35 +655,60 @@ export default function TeamManagement() {
                     <div className="space-y-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-muted-foreground">Manager</p>
+                          <p className="text-sm text-muted-foreground">
+                            Manager
+                          </p>
                           <p className="font-medium">{dept.manager}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Employees</p>
+                          <p className="text-sm text-muted-foreground">
+                            Employees
+                          </p>
                           <p className="font-medium">{dept.employeeCount}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Budget</p>
-                          <p className="font-medium">${dept.budget.toLocaleString()}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Budget
+                          </p>
+                          <p className="font-medium">
+                            ${dept.budget.toLocaleString()}
+                          </p>
                         </div>
                         <div>
-                          <p className="text-sm text-muted-foreground">Active</p>
-                          <p className="font-medium">{deptEmployees.filter(emp => emp.status === 'active').length}</p>
+                          <p className="text-sm text-muted-foreground">
+                            Active
+                          </p>
+                          <p className="font-medium">
+                            {
+                              deptEmployees.filter(
+                                (emp) => emp.status === "active",
+                              ).length
+                            }
+                          </p>
                         </div>
                       </div>
 
                       <div>
-                        <p className="text-sm text-muted-foreground mb-2">Team Members</p>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          Team Members
+                        </p>
                         <div className="flex -space-x-2">
                           {deptEmployees.slice(0, 5).map((emp) => (
-                            <Avatar key={emp.id} className="h-8 w-8 border-2 border-background">
+                            <Avatar
+                              key={emp.id}
+                              className="h-8 w-8 border-2 border-background"
+                            >
                               <AvatarImage src={emp.avatar} />
-                              <AvatarFallback className="text-xs">{emp.name.slice(0, 2)}</AvatarFallback>
+                              <AvatarFallback className="text-xs">
+                                {emp.name.slice(0, 2)}
+                              </AvatarFallback>
                             </Avatar>
                           ))}
                           {deptEmployees.length > 5 && (
                             <div className="h-8 w-8 rounded-full bg-muted border-2 border-background flex items-center justify-center">
-                              <span className="text-xs">+{deptEmployees.length - 5}</span>
+                              <span className="text-xs">
+                                +{deptEmployees.length - 5}
+                              </span>
                             </div>
                           )}
                         </div>
@@ -580,17 +739,31 @@ export default function TeamManagement() {
                         <Shield className="h-5 w-5 text-muted-foreground" />
                         <h3 className="font-medium">{role.name}</h3>
                       </div>
-                      <Badge variant={role.level === 'high' ? 'default' : role.level === 'medium' ? 'secondary' : 'outline'}>
+                      <Badge
+                        variant={
+                          role.level === "high"
+                            ? "default"
+                            : role.level === "medium"
+                              ? "secondary"
+                              : "outline"
+                        }
+                      >
                         {role.level} access
                       </Badge>
                     </div>
-                    
+
                     <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground">Permissions:</p>
+                      <p className="text-sm text-muted-foreground">
+                        Permissions:
+                      </p>
                       <div className="flex flex-wrap gap-1">
                         {role.permissions.slice(0, 3).map((perm) => (
-                          <Badge key={perm} variant="outline" className="text-xs">
-                            {perm.replace('_', ' ')}
+                          <Badge
+                            key={perm}
+                            variant="outline"
+                            className="text-xs"
+                          >
+                            {perm.replace("_", " ")}
                           </Badge>
                         ))}
                         {role.permissions.length > 3 && (
@@ -631,13 +804,18 @@ export default function TeamManagement() {
                       <tr key={permission.id} className="border-b">
                         <td className="p-2">
                           <div>
-                            <p className="font-medium text-sm">{permission.name}</p>
-                            <p className="text-xs text-muted-foreground">{permission.description}</p>
+                            <p className="font-medium text-sm">
+                              {permission.name}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {permission.description}
+                            </p>
                           </div>
                         </td>
                         {roles.map((role) => (
                           <td key={role.id} className="p-2 text-center">
-                            {(role.permissions.includes('all') || role.permissions.includes(permission.id)) ? (
+                            {role.permissions.includes("all") ||
+                            role.permissions.includes(permission.id) ? (
                               <CheckCircle className="h-4 w-4 text-success mx-auto" />
                             ) : (
                               <XCircle className="h-4 w-4 text-muted-foreground mx-auto" />
@@ -663,18 +841,25 @@ export default function TeamManagement() {
             <CardContent>
               <div className="space-y-4">
                 {employees.slice(0, 3).map((employee) => (
-                  <div key={employee.id} className="flex items-center justify-between p-3 border rounded">
+                  <div
+                    key={employee.id}
+                    className="flex items-center justify-between p-3 border rounded"
+                  >
                     <div className="flex items-center gap-3">
                       <Avatar className="h-8 w-8">
                         <AvatarImage src={employee.avatar} />
-                        <AvatarFallback>{employee.name.slice(0, 2)}</AvatarFallback>
+                        <AvatarFallback>
+                          {employee.name.slice(0, 2)}
+                        </AvatarFallback>
                       </Avatar>
                       <div>
                         <p className="font-medium">{employee.name}</p>
-                        <p className="text-sm text-muted-foreground">{employee.role}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {employee.role}
+                        </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
                       <Badge variant="outline" className="text-xs">
                         {employee.permissions.length} permissions

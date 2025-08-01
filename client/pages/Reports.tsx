@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 import {
   BarChart,
   Bar,
@@ -21,8 +33,8 @@ import {
   Tooltip,
   ResponsiveContainer,
   Area,
-  AreaChart
-} from 'recharts';
+  AreaChart,
+} from "recharts";
 import {
   TrendingUp,
   TrendingDown,
@@ -36,75 +48,90 @@ import {
   Target,
   BarChart3,
   PieChart as PieChartIcon,
-  FileSpreadsheet
-} from 'lucide-react';
+  FileSpreadsheet,
+} from "lucide-react";
 
 // Sample data for charts
 const attendanceData = [
-  { month: 'Jan', present: 92, absent: 8, late: 12 },
-  { month: 'Feb', present: 94, absent: 6, late: 10 },
-  { month: 'Mar', present: 89, absent: 11, late: 15 },
-  { month: 'Apr', present: 96, absent: 4, late: 8 },
-  { month: 'May', present: 93, absent: 7, late: 11 },
-  { month: 'Jun', present: 91, absent: 9, late: 13 },
+  { month: "Jan", present: 92, absent: 8, late: 12 },
+  { month: "Feb", present: 94, absent: 6, late: 10 },
+  { month: "Mar", present: 89, absent: 11, late: 15 },
+  { month: "Apr", present: 96, absent: 4, late: 8 },
+  { month: "May", present: 93, absent: 7, late: 11 },
+  { month: "Jun", present: 91, absent: 9, late: 13 },
 ];
 
 const departmentData = [
-  { department: 'Engineering', hours: 1840, efficiency: 94 },
-  { department: 'Design', hours: 920, efficiency: 96 },
-  { department: 'Management', hours: 640, efficiency: 89 },
-  { department: 'HR', hours: 480, efficiency: 92 },
-  { department: 'Analytics', hours: 560, efficiency: 98 },
+  { department: "Engineering", hours: 1840, efficiency: 94 },
+  { department: "Design", hours: 920, efficiency: 96 },
+  { department: "Management", hours: 640, efficiency: 89 },
+  { department: "HR", hours: 480, efficiency: 92 },
+  { department: "Analytics", hours: 560, efficiency: 98 },
 ];
 
 const overtimeData = [
-  { week: 'Week 1', hours: 45, employees: 8 },
-  { week: 'Week 2', hours: 62, employees: 12 },
-  { week: 'Week 3', hours: 38, employees: 6 },
-  { week: 'Week 4', hours: 71, employees: 15 },
+  { week: "Week 1", hours: 45, employees: 8 },
+  { week: "Week 2", hours: 62, employees: 12 },
+  { week: "Week 3", hours: 38, employees: 6 },
+  { week: "Week 4", hours: 71, employees: 15 },
 ];
 
 const leaveDistribution = [
-  { name: 'Vacation', value: 45, color: '#3B82F6' },
-  { name: 'Sick Leave', value: 25, color: '#EF4444' },
-  { name: 'Personal', value: 15, color: '#10B981' },
-  { name: 'Maternity', value: 10, color: '#8B5CF6' },
-  { name: 'Other', value: 5, color: '#F59E0B' },
+  { name: "Vacation", value: 45, color: "#3B82F6" },
+  { name: "Sick Leave", value: 25, color: "#EF4444" },
+  { name: "Personal", value: 15, color: "#10B981" },
+  { name: "Maternity", value: 10, color: "#8B5CF6" },
+  { name: "Other", value: 5, color: "#F59E0B" },
 ];
 
 const productivityTrends = [
-  { date: '2024-12-01', productivity: 85, projects: 12 },
-  { date: '2024-12-02', productivity: 87, projects: 14 },
-  { date: '2024-12-03', productivity: 82, projects: 11 },
-  { date: '2024-12-04', productivity: 89, projects: 15 },
-  { date: '2024-12-05', productivity: 91, projects: 16 },
-  { date: '2024-12-06', productivity: 88, projects: 13 },
-  { date: '2024-12-07', productivity: 93, projects: 17 },
+  { date: "2024-12-01", productivity: 85, projects: 12 },
+  { date: "2024-12-02", productivity: 87, projects: 14 },
+  { date: "2024-12-03", productivity: 82, projects: 11 },
+  { date: "2024-12-04", productivity: 89, projects: 15 },
+  { date: "2024-12-05", productivity: 91, projects: 16 },
+  { date: "2024-12-06", productivity: 88, projects: 13 },
+  { date: "2024-12-07", productivity: 93, projects: 17 },
 ];
 
 const topPerformers = [
-  { name: 'Sarah Wilson', hours: 168, efficiency: 98, department: 'Engineering' },
-  { name: 'Mike Chen', hours: 164, efficiency: 96, department: 'Design' },
-  { name: 'Emily Davis', hours: 172, efficiency: 94, department: 'Management' },
-  { name: 'Tom Johnson', hours: 166, efficiency: 97, department: 'Engineering' },
-  { name: 'Lisa Brown', hours: 160, efficiency: 95, department: 'HR' },
+  {
+    name: "Sarah Wilson",
+    hours: 168,
+    efficiency: 98,
+    department: "Engineering",
+  },
+  { name: "Mike Chen", hours: 164, efficiency: 96, department: "Design" },
+  { name: "Emily Davis", hours: 172, efficiency: 94, department: "Management" },
+  {
+    name: "Tom Johnson",
+    hours: 166,
+    efficiency: 97,
+    department: "Engineering",
+  },
+  { name: "Lisa Brown", hours: 160, efficiency: 95, department: "HR" },
 ];
 
 const complianceMetrics = [
-  { metric: 'Overtime Compliance', value: 96, threshold: 95, status: 'compliant' },
-  { metric: 'Break Compliance', value: 89, threshold: 90, status: 'warning' },
-  { metric: 'Maximum Hours', value: 100, threshold: 100, status: 'compliant' },
-  { metric: 'Rest Period', value: 94, threshold: 95, status: 'warning' },
+  {
+    metric: "Overtime Compliance",
+    value: 96,
+    threshold: 95,
+    status: "compliant",
+  },
+  { metric: "Break Compliance", value: 89, threshold: 90, status: "warning" },
+  { metric: "Maximum Hours", value: 100, threshold: 100, status: "compliant" },
+  { metric: "Rest Period", value: 94, threshold: 95, status: "warning" },
 ];
 
 export default function Reports() {
-  const [selectedPeriod, setSelectedPeriod] = useState('month');
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
-  const [selectedTab, setSelectedTab] = useState('overview');
+  const [selectedPeriod, setSelectedPeriod] = useState("month");
+  const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [selectedTab, setSelectedTab] = useState("overview");
 
   const generateReport = (type: string) => {
     // In a real app, this would generate and download a report
-    console.log('Generating report:', type);
+    console.log("Generating report:", type);
   };
 
   return (
@@ -112,17 +139,22 @@ export default function Reports() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Reports & Analytics</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Reports & Analytics
+          </h1>
           <p className="text-muted-foreground">
             Comprehensive insights into attendance, productivity, and compliance
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" onClick={() => generateReport('attendance')}>
+          <Button
+            variant="outline"
+            onClick={() => generateReport("attendance")}
+          >
             <Download className="h-4 w-4 mr-2" />
             Export Report
           </Button>
-          <Button onClick={() => generateReport('custom')}>
+          <Button onClick={() => generateReport("custom")}>
             <FileSpreadsheet className="h-4 w-4 mr-2" />
             Custom Report
           </Button>
@@ -148,11 +180,14 @@ export default function Reports() {
                 </SelectContent>
               </Select>
             </div>
-            
+
             <div className="flex items-center gap-2">
               <Filter className="h-4 w-4 text-muted-foreground" />
               <Label htmlFor="department-filter">Department:</Label>
-              <Select value={selectedDepartment} onValueChange={setSelectedDepartment}>
+              <Select
+                value={selectedDepartment}
+                onValueChange={setSelectedDepartment}
+              >
                 <SelectTrigger className="w-40">
                   <SelectValue />
                 </SelectTrigger>
@@ -169,7 +204,12 @@ export default function Reports() {
 
             <div className="flex items-center gap-2">
               <Label htmlFor="date-range">Date Range:</Label>
-              <Input id="date-range" type="date" className="w-40" defaultValue="2024-12-01" />
+              <Input
+                id="date-range"
+                type="date"
+                className="w-40"
+                defaultValue="2024-12-01"
+              />
               <span className="text-muted-foreground">to</span>
               <Input type="date" className="w-40" defaultValue="2024-12-31" />
             </div>
@@ -190,7 +230,9 @@ export default function Reports() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Attendance Rate</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Attendance Rate
+                </CardTitle>
                 <CheckCircle className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -204,7 +246,9 @@ export default function Reports() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Average Hours</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Average Hours
+                </CardTitle>
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -218,7 +262,9 @@ export default function Reports() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Overtime Hours</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Overtime Hours
+                </CardTitle>
                 <AlertTriangle className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -232,7 +278,9 @@ export default function Reports() {
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Team Efficiency</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Team Efficiency
+                </CardTitle>
                 <Target className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -261,9 +309,24 @@ export default function Reports() {
                     <XAxis dataKey="month" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="present" stroke="#10B981" strokeWidth={2} />
-                    <Line type="monotone" dataKey="absent" stroke="#EF4444" strokeWidth={2} />
-                    <Line type="monotone" dataKey="late" stroke="#F59E0B" strokeWidth={2} />
+                    <Line
+                      type="monotone"
+                      dataKey="present"
+                      stroke="#10B981"
+                      strokeWidth={2}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="absent"
+                      stroke="#EF4444"
+                      strokeWidth={2}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="late"
+                      stroke="#F59E0B"
+                      strokeWidth={2}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -280,7 +343,12 @@ export default function Reports() {
                 <ResponsiveContainer width="100%" height={300}>
                   <BarChart data={departmentData}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="department" angle={-45} textAnchor="end" height={80} />
+                    <XAxis
+                      dataKey="department"
+                      angle={-45}
+                      textAnchor="end"
+                      height={80}
+                    />
                     <YAxis />
                     <Tooltip />
                     <Bar dataKey="hours" fill="#3B82F6" />
@@ -318,10 +386,13 @@ export default function Reports() {
                 </ResponsiveContainer>
                 <div className="mt-4 space-y-2">
                   {leaveDistribution.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between text-sm">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between text-sm"
+                    >
                       <div className="flex items-center gap-2">
-                        <div 
-                          className="w-3 h-3 rounded" 
+                        <div
+                          className="w-3 h-3 rounded"
                           style={{ backgroundColor: item.color }}
                         />
                         <span>{item.name}</span>
@@ -347,7 +418,13 @@ export default function Reports() {
                     <XAxis dataKey="week" />
                     <YAxis />
                     <Tooltip />
-                    <Area type="monotone" dataKey="hours" stroke="#8B5CF6" fill="#8B5CF6" fillOpacity={0.6} />
+                    <Area
+                      type="monotone"
+                      dataKey="hours"
+                      stroke="#8B5CF6"
+                      fill="#8B5CF6"
+                      fillOpacity={0.6}
+                    />
                   </AreaChart>
                 </ResponsiveContainer>
               </CardContent>
@@ -369,14 +446,21 @@ export default function Reports() {
                   <h3 className="font-medium mb-4">Top Performers</h3>
                   <div className="space-y-3">
                     {topPerformers.map((performer, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border rounded">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-3 border rounded"
+                      >
                         <div>
                           <p className="font-medium">{performer.name}</p>
-                          <p className="text-sm text-muted-foreground">{performer.department}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {performer.department}
+                          </p>
                         </div>
                         <div className="text-right">
                           <p className="font-medium">{performer.hours}h</p>
-                          <p className="text-sm text-muted-foreground">{performer.efficiency}% efficiency</p>
+                          <p className="text-sm text-muted-foreground">
+                            {performer.efficiency}% efficiency
+                          </p>
                         </div>
                       </div>
                     ))}
@@ -443,8 +527,18 @@ export default function Reports() {
                   <XAxis dataKey="date" />
                   <YAxis />
                   <Tooltip />
-                  <Line type="monotone" dataKey="productivity" stroke="#10B981" strokeWidth={2} />
-                  <Line type="monotone" dataKey="projects" stroke="#3B82F6" strokeWidth={2} />
+                  <Line
+                    type="monotone"
+                    dataKey="productivity"
+                    stroke="#10B981"
+                    strokeWidth={2}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="projects"
+                    stroke="#3B82F6"
+                    strokeWidth={2}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </CardContent>
@@ -519,15 +613,25 @@ export default function Reports() {
                   <div key={index} className="p-4 border rounded">
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-medium">{metric.metric}</h3>
-                      <Badge 
-                        variant={metric.status === 'compliant' ? 'default' : 'destructive'}
+                      <Badge
+                        variant={
+                          metric.status === "compliant"
+                            ? "default"
+                            : "destructive"
+                        }
                         className={
-                          metric.status === 'compliant' ? 'bg-success' : 
-                          metric.status === 'warning' ? 'bg-warning' : 'bg-destructive'
+                          metric.status === "compliant"
+                            ? "bg-success"
+                            : metric.status === "warning"
+                              ? "bg-warning"
+                              : "bg-destructive"
                         }
                       >
-                        {metric.status === 'compliant' ? 'Compliant' : 
-                         metric.status === 'warning' ? 'Warning' : 'Non-Compliant'}
+                        {metric.status === "compliant"
+                          ? "Compliant"
+                          : metric.status === "warning"
+                            ? "Warning"
+                            : "Non-Compliant"}
                       </Badge>
                     </div>
                     <div className="space-y-2">
@@ -535,19 +639,20 @@ export default function Reports() {
                         <span>Current</span>
                         <span>{metric.value}%</span>
                       </div>
-                      <Progress 
-                        value={metric.value} 
+                      <Progress
+                        value={metric.value}
                         className={`h-2 ${
-                          metric.value >= metric.threshold ? 'bg-success/20' : 'bg-destructive/20'
+                          metric.value >= metric.threshold
+                            ? "bg-success/20"
+                            : "bg-destructive/20"
                         }`}
                       />
                       <div className="flex justify-between text-xs text-muted-foreground">
                         <span>Threshold: {metric.threshold}%</span>
                         <span>
-                          {metric.value >= metric.threshold ? 
-                            `+${metric.value - metric.threshold}%` : 
-                            `${metric.value - metric.threshold}%`
-                          }
+                          {metric.value >= metric.threshold
+                            ? `+${metric.value - metric.threshold}%`
+                            : `${metric.value - metric.threshold}%`}
                         </span>
                       </div>
                     </div>
@@ -569,17 +674,22 @@ export default function Reports() {
                 <div className="flex items-start gap-3 p-3 border rounded border-warning/50 bg-warning/5">
                   <AlertTriangle className="h-5 w-5 text-warning mt-0.5" />
                   <div>
-                    <p className="font-medium">Break Compliance Below Threshold</p>
+                    <p className="font-medium">
+                      Break Compliance Below Threshold
+                    </p>
                     <p className="text-sm text-muted-foreground">
-                      3 employees have not taken required breaks in the past week
+                      3 employees have not taken required breaks in the past
+                      week
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3 p-3 border rounded border-success/50 bg-success/5">
                   <CheckCircle className="h-5 w-5 text-success mt-0.5" />
                   <div>
-                    <p className="font-medium">Overtime Compliance Maintained</p>
+                    <p className="font-medium">
+                      Overtime Compliance Maintained
+                    </p>
                     <p className="text-sm text-muted-foreground">
                       All overtime hours are within legal limits for this month
                     </p>

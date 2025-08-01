@@ -1,10 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import {
   Clock,
   Play,
@@ -16,31 +28,33 @@ import {
   Coffee,
   Building,
   Smartphone,
-  Monitor
-} from 'lucide-react';
+  Monitor,
+} from "lucide-react";
 
 const projects = [
-  { id: '1', name: 'Website Redesign', client: 'Acme Corp' },
-  { id: '2', name: 'Mobile App', client: 'TechStart' },
-  { id: '3', name: 'E-commerce Platform', client: 'RetailCo' },
-  { id: '4', name: 'Internal Training', client: 'Internal' },
+  { id: "1", name: "Website Redesign", client: "Acme Corp" },
+  { id: "2", name: "Mobile App", client: "TechStart" },
+  { id: "3", name: "E-commerce Platform", client: "RetailCo" },
+  { id: "4", name: "Internal Training", client: "Internal" },
 ];
 
 const locations = [
-  { id: 'office', name: 'Main Office', address: '123 Business St' },
-  { id: 'home', name: 'Remote/Home', address: 'Remote Work' },
-  { id: 'client', name: 'Client Site', address: 'Client Location' },
+  { id: "office", name: "Main Office", address: "123 Business St" },
+  { id: "home", name: "Remote/Home", address: "Remote Work" },
+  { id: "client", name: "Client Site", address: "Client Location" },
 ];
 
 export default function TimeClock() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isWorking, setIsWorking] = useState(true);
   const [onBreak, setOnBreak] = useState(false);
-  const [sessionStart, setSessionStart] = useState(new Date(Date.now() - 2 * 60 * 60 * 1000));
+  const [sessionStart, setSessionStart] = useState(
+    new Date(Date.now() - 2 * 60 * 60 * 1000),
+  );
   const [breakStart, setBreakStart] = useState<Date | null>(null);
-  const [selectedProject, setSelectedProject] = useState('1');
-  const [selectedLocation, setSelectedLocation] = useState('office');
-  const [notes, setNotes] = useState('');
+  const [selectedProject, setSelectedProject] = useState("1");
+  const [selectedLocation, setSelectedLocation] = useState("office");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -52,7 +66,7 @@ export default function TimeClock() {
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
   };
 
   const handleClockIn = () => {
@@ -76,8 +90,9 @@ export default function TimeClock() {
     }
   };
 
-  const totalWorkedTime = isWorking ? formatDuration(sessionStart) : '00:00:00';
-  const breakTime = onBreak && breakStart ? formatDuration(breakStart) : '00:00:00';
+  const totalWorkedTime = isWorking ? formatDuration(sessionStart) : "00:00:00";
+  const breakTime =
+    onBreak && breakStart ? formatDuration(breakStart) : "00:00:00";
 
   return (
     <div className="space-y-6">
@@ -120,7 +135,9 @@ export default function TimeClock() {
               </div>
               {onBreak && (
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-1">Break Time</p>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    Break Time
+                  </p>
                   <div className="text-4xl font-mono font-bold text-warning">
                     {breakTime}
                   </div>
@@ -130,8 +147,10 @@ export default function TimeClock() {
 
             {/* Status Badge */}
             <div className="flex justify-center">
-              <Badge 
-                variant={onBreak ? "secondary" : isWorking ? "default" : "outline"}
+              <Badge
+                variant={
+                  onBreak ? "secondary" : isWorking ? "default" : "outline"
+                }
                 className="px-4 py-2 text-sm"
               >
                 {onBreak ? (
@@ -157,8 +176,8 @@ export default function TimeClock() {
           {/* Control Buttons */}
           <div className="flex justify-center gap-4">
             {!isWorking ? (
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 onClick={handleClockIn}
                 className="flex items-center gap-2"
               >
@@ -167,8 +186,8 @@ export default function TimeClock() {
               </Button>
             ) : (
               <>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="destructive"
                   onClick={handleClockOut}
                   className="flex items-center gap-2"
@@ -176,8 +195,8 @@ export default function TimeClock() {
                   <Square className="h-5 w-5" />
                   Clock Out
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant={onBreak ? "default" : "outline"}
                   onClick={handleBreak}
                   className="flex items-center gap-2"
@@ -210,7 +229,10 @@ export default function TimeClock() {
           <CardContent className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="project">Project</Label>
-              <Select value={selectedProject} onValueChange={setSelectedProject}>
+              <Select
+                value={selectedProject}
+                onValueChange={setSelectedProject}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a project" />
                 </SelectTrigger>
@@ -219,7 +241,9 @@ export default function TimeClock() {
                     <SelectItem key={project.id} value={project.id}>
                       <div>
                         <p className="font-medium">{project.name}</p>
-                        <p className="text-sm text-muted-foreground">{project.client}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {project.client}
+                        </p>
                       </div>
                     </SelectItem>
                   ))}
@@ -229,7 +253,10 @@ export default function TimeClock() {
 
             <div className="space-y-2">
               <Label htmlFor="location">Location</Label>
-              <Select value={selectedLocation} onValueChange={setSelectedLocation}>
+              <Select
+                value={selectedLocation}
+                onValueChange={setSelectedLocation}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select location" />
                 </SelectTrigger>
@@ -237,12 +264,20 @@ export default function TimeClock() {
                   {locations.map((location) => (
                     <SelectItem key={location.id} value={location.id}>
                       <div className="flex items-center gap-2">
-                        {location.id === 'office' && <Building className="h-4 w-4" />}
-                        {location.id === 'home' && <Monitor className="h-4 w-4" />}
-                        {location.id === 'client' && <MapPin className="h-4 w-4" />}
+                        {location.id === "office" && (
+                          <Building className="h-4 w-4" />
+                        )}
+                        {location.id === "home" && (
+                          <Monitor className="h-4 w-4" />
+                        )}
+                        {location.id === "client" && (
+                          <MapPin className="h-4 w-4" />
+                        )}
                         <div>
                           <p className="font-medium">{location.name}</p>
-                          <p className="text-sm text-muted-foreground">{location.address}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {location.address}
+                          </p>
                         </div>
                       </div>
                     </SelectItem>
@@ -321,12 +356,39 @@ export default function TimeClock() {
         <CardContent>
           <div className="space-y-3">
             {[
-              { date: 'Today', clockIn: '9:00 AM', clockOut: 'In Progress', hours: '2h 45m', project: 'Website Redesign' },
-              { date: 'Yesterday', clockIn: '8:45 AM', clockOut: '5:30 PM', hours: '8h 00m', project: 'Mobile App' },
-              { date: 'Dec 16', clockIn: '9:15 AM', clockOut: '5:45 PM', hours: '7h 45m', project: 'E-commerce Platform' },
-              { date: 'Dec 15', clockIn: '9:00 AM', clockOut: '6:00 PM', hours: '8h 15m', project: 'Website Redesign' },
+              {
+                date: "Today",
+                clockIn: "9:00 AM",
+                clockOut: "In Progress",
+                hours: "2h 45m",
+                project: "Website Redesign",
+              },
+              {
+                date: "Yesterday",
+                clockIn: "8:45 AM",
+                clockOut: "5:30 PM",
+                hours: "8h 00m",
+                project: "Mobile App",
+              },
+              {
+                date: "Dec 16",
+                clockIn: "9:15 AM",
+                clockOut: "5:45 PM",
+                hours: "7h 45m",
+                project: "E-commerce Platform",
+              },
+              {
+                date: "Dec 15",
+                clockIn: "9:00 AM",
+                clockOut: "6:00 PM",
+                hours: "8h 15m",
+                project: "Website Redesign",
+              },
             ].map((session, index) => (
-              <div key={index} className="flex items-center justify-between py-2 border-b last:border-b-0">
+              <div
+                key={index}
+                className="flex items-center justify-between py-2 border-b last:border-b-0"
+              >
                 <div className="flex items-center gap-4">
                   <div className="text-sm font-medium w-20">{session.date}</div>
                   <div className="text-sm text-muted-foreground">
@@ -336,7 +398,9 @@ export default function TimeClock() {
                     {session.project}
                   </Badge>
                 </div>
-                <div className="text-sm font-mono font-medium">{session.hours}</div>
+                <div className="text-sm font-mono font-medium">
+                  {session.hours}
+                </div>
               </div>
             ))}
           </div>

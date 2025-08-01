@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Calendar,
   Clock,
@@ -25,92 +44,209 @@ import {
   CheckCircle,
   User,
   Building,
-  Briefcase
-} from 'lucide-react';
+  Briefcase,
+} from "lucide-react";
 
 const projects = [
-  { id: '1', name: 'Website Redesign', client: 'Acme Corp', rate: 150, billable: true },
-  { id: '2', name: 'Mobile App Development', client: 'TechStart', rate: 175, billable: true },
-  { id: '3', name: 'Internal Training', client: 'Internal', rate: 0, billable: false },
-  { id: '4', name: 'Team Meeting', client: 'Internal', rate: 0, billable: false },
+  {
+    id: "1",
+    name: "Website Redesign",
+    client: "Acme Corp",
+    rate: 150,
+    billable: true,
+  },
+  {
+    id: "2",
+    name: "Mobile App Development",
+    client: "TechStart",
+    rate: 175,
+    billable: true,
+  },
+  {
+    id: "3",
+    name: "Internal Training",
+    client: "Internal",
+    rate: 0,
+    billable: false,
+  },
+  {
+    id: "4",
+    name: "Team Meeting",
+    client: "Internal",
+    rate: 0,
+    billable: false,
+  },
 ];
 
 const timesheets = [
   {
-    id: '1',
-    employee: { name: 'Sarah Wilson', avatar: '/placeholder.svg', id: 'EMP001' },
-    week: 'Dec 16-22, 2024',
-    status: 'submitted',
+    id: "1",
+    employee: {
+      name: "Sarah Wilson",
+      avatar: "/placeholder.svg",
+      id: "EMP001",
+    },
+    week: "Dec 16-22, 2024",
+    status: "submitted",
     totalHours: 40,
     billableHours: 35,
-    submittedDate: '2024-12-19',
+    submittedDate: "2024-12-19",
     approvedBy: null,
     entries: [
-      { date: '2024-12-16', project: 'Website Redesign', hours: 8, description: 'Homepage design implementation', billable: true },
-      { date: '2024-12-17', project: 'Website Redesign', hours: 7, description: 'Responsive layout fixes', billable: true },
-      { date: '2024-12-18', project: 'Internal Training', hours: 1, description: 'React workshop', billable: false },
-      { date: '2024-12-19', project: 'Website Redesign', hours: 8, description: 'Component optimization', billable: true },
-      { date: '2024-12-20', project: 'Team Meeting', hours: 2, description: 'Sprint planning', billable: false },
-    ]
+      {
+        date: "2024-12-16",
+        project: "Website Redesign",
+        hours: 8,
+        description: "Homepage design implementation",
+        billable: true,
+      },
+      {
+        date: "2024-12-17",
+        project: "Website Redesign",
+        hours: 7,
+        description: "Responsive layout fixes",
+        billable: true,
+      },
+      {
+        date: "2024-12-18",
+        project: "Internal Training",
+        hours: 1,
+        description: "React workshop",
+        billable: false,
+      },
+      {
+        date: "2024-12-19",
+        project: "Website Redesign",
+        hours: 8,
+        description: "Component optimization",
+        billable: true,
+      },
+      {
+        date: "2024-12-20",
+        project: "Team Meeting",
+        hours: 2,
+        description: "Sprint planning",
+        billable: false,
+      },
+    ],
   },
   {
-    id: '2',
-    employee: { name: 'Mike Chen', avatar: '/placeholder.svg', id: 'EMP002' },
-    week: 'Dec 16-22, 2024',
-    status: 'approved',
+    id: "2",
+    employee: { name: "Mike Chen", avatar: "/placeholder.svg", id: "EMP002" },
+    week: "Dec 16-22, 2024",
+    status: "approved",
     totalHours: 38,
     billableHours: 32,
-    submittedDate: '2024-12-18',
-    approvedBy: 'Emily Davis',
-    approvedDate: '2024-12-19',
+    submittedDate: "2024-12-18",
+    approvedBy: "Emily Davis",
+    approvedDate: "2024-12-19",
     entries: [
-      { date: '2024-12-16', project: 'Mobile App Development', hours: 8, description: 'UI mockups creation', billable: true },
-      { date: '2024-12-17', project: 'Mobile App Development', hours: 6, description: 'Component development', billable: true },
-      { date: '2024-12-18', project: 'Mobile App Development', hours: 8, description: 'API integration', billable: true },
-      { date: '2024-12-19', project: 'Team Meeting', hours: 2, description: 'Design review', billable: false },
-    ]
-  }
+      {
+        date: "2024-12-16",
+        project: "Mobile App Development",
+        hours: 8,
+        description: "UI mockups creation",
+        billable: true,
+      },
+      {
+        date: "2024-12-17",
+        project: "Mobile App Development",
+        hours: 6,
+        description: "Component development",
+        billable: true,
+      },
+      {
+        date: "2024-12-18",
+        project: "Mobile App Development",
+        hours: 8,
+        description: "API integration",
+        billable: true,
+      },
+      {
+        date: "2024-12-19",
+        project: "Team Meeting",
+        hours: 2,
+        description: "Design review",
+        billable: false,
+      },
+    ],
+  },
 ];
 
 const pendingApprovals = [
-  { employee: 'Sarah Wilson', week: 'Dec 16-22', hours: 40, submitted: '2024-12-19', urgent: false },
-  { employee: 'Tom Johnson', week: 'Dec 16-22', hours: 45, submitted: '2024-12-18', urgent: true },
-  { employee: 'Lisa Brown', week: 'Dec 9-15', hours: 38, submitted: '2024-12-16', urgent: true },
+  {
+    employee: "Sarah Wilson",
+    week: "Dec 16-22",
+    hours: 40,
+    submitted: "2024-12-19",
+    urgent: false,
+  },
+  {
+    employee: "Tom Johnson",
+    week: "Dec 16-22",
+    hours: 45,
+    submitted: "2024-12-18",
+    urgent: true,
+  },
+  {
+    employee: "Lisa Brown",
+    week: "Dec 9-15",
+    hours: 38,
+    submitted: "2024-12-16",
+    urgent: true,
+  },
 ];
 
 const corrections = [
-  { employee: 'Mike Chen', week: 'Dec 9-15', issue: 'Incorrect project allocation', status: 'pending', requestDate: '2024-12-17' },
-  { employee: 'Sarah Wilson', week: 'Dec 2-8', issue: 'Missing overtime hours', status: 'approved', requestDate: '2024-12-10' },
+  {
+    employee: "Mike Chen",
+    week: "Dec 9-15",
+    issue: "Incorrect project allocation",
+    status: "pending",
+    requestDate: "2024-12-17",
+  },
+  {
+    employee: "Sarah Wilson",
+    week: "Dec 2-8",
+    issue: "Missing overtime hours",
+    status: "approved",
+    requestDate: "2024-12-10",
+  },
 ];
 
 export default function Timesheets() {
-  const [selectedTab, setSelectedTab] = useState('my-timesheets');
+  const [selectedTab, setSelectedTab] = useState("my-timesheets");
   const [isCreateEntryOpen, setIsCreateEntryOpen] = useState(false);
-  const [selectedWeek, setSelectedWeek] = useState('2024-12-16');
-  const [selectedProject, setSelectedProject] = useState('');
-  const [filterStatus, setFilterStatus] = useState('all');
+  const [selectedWeek, setSelectedWeek] = useState("2024-12-16");
+  const [selectedProject, setSelectedProject] = useState("");
+  const [filterStatus, setFilterStatus] = useState("all");
 
   const [newEntry, setNewEntry] = useState({
-    date: '',
-    project: '',
-    hours: '',
-    description: ''
+    date: "",
+    project: "",
+    hours: "",
+    description: "",
   });
 
   const handleCreateEntry = () => {
     // In a real app, this would create a new timesheet entry
-    console.log('Creating entry:', newEntry);
+    console.log("Creating entry:", newEntry);
     setIsCreateEntryOpen(false);
-    setNewEntry({ date: '', project: '', hours: '', description: '' });
+    setNewEntry({ date: "", project: "", hours: "", description: "" });
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'approved': return 'bg-success';
-      case 'submitted': return 'bg-warning';
-      case 'draft': return 'bg-muted';
-      case 'rejected': return 'bg-destructive';
-      default: return 'bg-muted';
+      case "approved":
+        return "bg-success";
+      case "submitted":
+        return "bg-warning";
+      case "draft":
+        return "bg-muted";
+      case "rejected":
+        return "bg-destructive";
+      default:
+        return "bg-muted";
     }
   };
 
@@ -123,7 +259,9 @@ export default function Timesheets() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Timesheet Management</h1>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Timesheet Management
+          </h1>
           <p className="text-muted-foreground">
             Submit, review, and manage employee timesheets
           </p>
@@ -154,13 +292,20 @@ export default function Timesheets() {
                     id="entry-date"
                     type="date"
                     value={newEntry.date}
-                    onChange={(e) => setNewEntry(prev => ({ ...prev, date: e.target.value }))}
+                    onChange={(e) =>
+                      setNewEntry((prev) => ({ ...prev, date: e.target.value }))
+                    }
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="entry-project">Project</Label>
-                  <Select value={newEntry.project} onValueChange={(value) => setNewEntry(prev => ({ ...prev, project: value }))}>
+                  <Select
+                    value={newEntry.project}
+                    onValueChange={(value) =>
+                      setNewEntry((prev) => ({ ...prev, project: value }))
+                    }
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select project" />
                     </SelectTrigger>
@@ -169,7 +314,9 @@ export default function Timesheets() {
                         <SelectItem key={project.id} value={project.id}>
                           <div>
                             <p className="font-medium">{project.name}</p>
-                            <p className="text-sm text-muted-foreground">{project.client}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {project.client}
+                            </p>
                           </div>
                         </SelectItem>
                       ))}
@@ -186,7 +333,12 @@ export default function Timesheets() {
                     min="0"
                     max="24"
                     value={newEntry.hours}
-                    onChange={(e) => setNewEntry(prev => ({ ...prev, hours: e.target.value }))}
+                    onChange={(e) =>
+                      setNewEntry((prev) => ({
+                        ...prev,
+                        hours: e.target.value,
+                      }))
+                    }
                   />
                 </div>
 
@@ -196,18 +348,24 @@ export default function Timesheets() {
                     id="entry-description"
                     placeholder="Describe the work performed..."
                     value={newEntry.description}
-                    onChange={(e) => setNewEntry(prev => ({ ...prev, description: e.target.value }))}
+                    onChange={(e) =>
+                      setNewEntry((prev) => ({
+                        ...prev,
+                        description: e.target.value,
+                      }))
+                    }
                     rows={3}
                   />
                 </div>
 
                 <div className="flex justify-end gap-2">
-                  <Button variant="outline" onClick={() => setIsCreateEntryOpen(false)}>
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsCreateEntryOpen(false)}
+                  >
                     Cancel
                   </Button>
-                  <Button onClick={handleCreateEntry}>
-                    Add Entry
-                  </Button>
+                  <Button onClick={handleCreateEntry}>Add Entry</Button>
                 </div>
               </div>
             </DialogContent>
@@ -239,7 +397,7 @@ export default function Timesheets() {
                     className="w-40"
                   />
                 </div>
-                
+
                 <div className="flex items-center gap-2">
                   <Filter className="h-4 w-4 text-muted-foreground" />
                   <Label htmlFor="status-filter">Status:</Label>
@@ -264,27 +422,27 @@ export default function Timesheets() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Hours</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Total Hours
+                </CardTitle>
                 <Clock className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">40.0h</div>
-                <p className="text-xs text-muted-foreground">
-                  This week
-                </p>
+                <p className="text-xs text-muted-foreground">This week</p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Billable Hours</CardTitle>
+                <CardTitle className="text-sm font-medium">
+                  Billable Hours
+                </CardTitle>
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">35.0h</div>
-                <p className="text-xs text-muted-foreground">
-                  87.5% billable
-                </p>
+                <p className="text-xs text-muted-foreground">87.5% billable</p>
               </CardContent>
             </Card>
 
@@ -295,9 +453,7 @@ export default function Timesheets() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">3</div>
-                <p className="text-xs text-muted-foreground">
-                  Active projects
-                </p>
+                <p className="text-xs text-muted-foreground">Active projects</p>
               </CardContent>
             </Card>
 
@@ -308,9 +464,7 @@ export default function Timesheets() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">Draft</div>
-                <p className="text-xs text-muted-foreground">
-                  Ready to submit
-                </p>
+                <p className="text-xs text-muted-foreground">Ready to submit</p>
               </CardContent>
             </Card>
           </div>
@@ -335,11 +489,14 @@ export default function Timesheets() {
                 </div>
 
                 {timesheets[0].entries.map((entry, index) => (
-                  <div key={index} className="grid grid-cols-6 gap-4 text-sm items-center py-2 border-b last:border-b-0">
+                  <div
+                    key={index}
+                    className="grid grid-cols-6 gap-4 text-sm items-center py-2 border-b last:border-b-0"
+                  >
                     <div className="font-medium">
-                      {new Date(entry.date).toLocaleDateString('en-US', { 
-                        month: 'short', 
-                        day: 'numeric' 
+                      {new Date(entry.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
                       })}
                     </div>
                     <div>
@@ -347,8 +504,11 @@ export default function Timesheets() {
                     </div>
                     <div className="font-mono">{entry.hours}h</div>
                     <div>
-                      <Badge variant={entry.billable ? 'default' : 'secondary'} className="text-xs">
-                        {entry.billable ? 'Billable' : 'Non-billable'}
+                      <Badge
+                        variant={entry.billable ? "default" : "secondary"}
+                        className="text-xs"
+                      >
+                        {entry.billable ? "Billable" : "Non-billable"}
                       </Badge>
                     </div>
                     <div className="text-muted-foreground">
@@ -366,17 +526,19 @@ export default function Timesheets() {
                   <div className="flex justify-between items-center">
                     <div className="flex gap-4">
                       <div>
-                        <span className="text-sm text-muted-foreground">Total Hours: </span>
+                        <span className="text-sm text-muted-foreground">
+                          Total Hours:{" "}
+                        </span>
                         <span className="font-medium">40.0h</span>
                       </div>
                       <div>
-                        <span className="text-sm text-muted-foreground">Billable: </span>
+                        <span className="text-sm text-muted-foreground">
+                          Billable:{" "}
+                        </span>
                         <span className="font-medium">35.0h</span>
                       </div>
                     </div>
-                    <Button>
-                      Submit Timesheet
-                    </Button>
+                    <Button>Submit Timesheet</Button>
                   </div>
                 </div>
               </div>
@@ -438,13 +600,18 @@ export default function Timesheets() {
             <CardContent>
               <div className="space-y-4">
                 {pendingApprovals.map((timesheet, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex items-center gap-4">
                       <Avatar>
                         <AvatarImage src="/placeholder.svg" />
-                        <AvatarFallback>{timesheet.employee.slice(0, 2)}</AvatarFallback>
+                        <AvatarFallback>
+                          {timesheet.employee.slice(0, 2)}
+                        </AvatarFallback>
                       </Avatar>
-                      
+
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="font-medium">{timesheet.employee}</h3>
@@ -458,20 +625,29 @@ export default function Timesheets() {
                           Week: {timesheet.week} • {timesheet.hours} hours
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          Submitted: {new Date(timesheet.submitted).toLocaleDateString()}
+                          Submitted:{" "}
+                          {new Date(timesheet.submitted).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-2">
                       <Button variant="outline" size="sm">
                         Review
                       </Button>
-                      <Button size="sm" variant="outline" className="text-success border-success">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-success border-success"
+                      >
                         <Check className="h-4 w-4 mr-1" />
                         Approve
                       </Button>
-                      <Button size="sm" variant="outline" className="text-destructive border-destructive">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="text-destructive border-destructive"
+                      >
                         <X className="h-4 w-4 mr-1" />
                         Reject
                       </Button>
@@ -495,28 +671,35 @@ export default function Timesheets() {
             <CardContent>
               <div className="space-y-4">
                 {projects.map((project) => (
-                  <div key={project.id} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={project.id}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div className="flex items-center gap-4">
                       <div className="p-2 bg-muted rounded">
                         <Building className="h-5 w-5" />
                       </div>
                       <div>
                         <h3 className="font-medium">{project.name}</h3>
-                        <p className="text-sm text-muted-foreground">{project.client}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {project.client}
+                        </p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-4">
-                      <Badge variant={project.billable ? 'default' : 'secondary'}>
-                        {project.billable ? 'Billable' : 'Non-billable'}
+                      <Badge
+                        variant={project.billable ? "default" : "secondary"}
+                      >
+                        {project.billable ? "Billable" : "Non-billable"}
                       </Badge>
                       <div className="text-right">
                         <p className="font-medium">
-                          {project.billable ? `$${project.rate}/hr` : 'Internal'}
+                          {project.billable
+                            ? `$${project.rate}/hr`
+                            : "Internal"}
                         </p>
-                        <p className="text-xs text-muted-foreground">
-                          Rate
-                        </p>
+                        <p className="text-xs text-muted-foreground">Rate</p>
                       </div>
                     </div>
                   </div>
@@ -530,7 +713,9 @@ export default function Timesheets() {
             <Card>
               <CardHeader>
                 <CardTitle>This Week's Billing</CardTitle>
-                <CardDescription>Estimated billing for current week</CardDescription>
+                <CardDescription>
+                  Estimated billing for current week
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -553,7 +738,9 @@ export default function Timesheets() {
             <Card>
               <CardHeader>
                 <CardTitle>Monthly Summary</CardTitle>
-                <CardDescription>December 2024 billing overview</CardDescription>
+                <CardDescription>
+                  December 2024 billing overview
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -590,11 +777,20 @@ export default function Timesheets() {
             <CardContent>
               <div className="space-y-4">
                 {corrections.map((correction, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 border rounded-lg"
+                  >
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <h3 className="font-medium">{correction.employee}</h3>
-                        <Badge variant={correction.status === 'approved' ? 'default' : 'secondary'}>
+                        <Badge
+                          variant={
+                            correction.status === "approved"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
                           {correction.status}
                         </Badge>
                       </div>
@@ -603,18 +799,17 @@ export default function Timesheets() {
                       </p>
                       <p className="text-sm">{correction.issue}</p>
                       <p className="text-xs text-muted-foreground">
-                        Requested: {new Date(correction.requestDate).toLocaleDateString()}
+                        Requested:{" "}
+                        {new Date(correction.requestDate).toLocaleDateString()}
                       </p>
                     </div>
-                    
-                    {correction.status === 'pending' && (
+
+                    {correction.status === "pending" && (
                       <div className="flex gap-2">
                         <Button size="sm" variant="outline">
                           Review
                         </Button>
-                        <Button size="sm">
-                          Approve
-                        </Button>
+                        <Button size="sm">Approve</Button>
                       </div>
                     )}
                   </div>
@@ -662,9 +857,7 @@ export default function Timesheets() {
                   />
                 </div>
 
-                <Button>
-                  Submit Correction Request
-                </Button>
+                <Button>Submit Correction Request</Button>
               </div>
             </CardContent>
           </Card>

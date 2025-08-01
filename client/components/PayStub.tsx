@@ -1,9 +1,15 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Download, FileText, Building } from 'lucide-react';
+import React from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
+import { Download, FileText, Building } from "lucide-react";
 
 interface PayStubProps {
   employee: {
@@ -47,17 +53,17 @@ interface PayStubProps {
   };
 }
 
-export function PayStub({ 
-  employee, 
-  payPeriod, 
-  earnings, 
-  deductions, 
-  netPay, 
-  ytdTotals 
+export function PayStub({
+  employee,
+  payPeriod,
+  earnings,
+  deductions,
+  netPay,
+  ytdTotals,
 }: PayStubProps) {
   const handleDownload = () => {
     // In a real app, this would generate and download a PDF
-    console.log('Downloading pay stub...');
+    console.log("Downloading pay stub...");
   };
 
   return (
@@ -90,12 +96,25 @@ export function PayStub({
           <div>
             <h3 className="font-semibold mb-3">Employee Information</h3>
             <div className="space-y-1 text-sm">
-              <p><span className="font-medium">Name:</span> {employee.name}</p>
-              <p><span className="font-medium">Employee ID:</span> {employee.id}</p>
-              <p><span className="font-medium">Department:</span> {employee.department}</p>
-              <p><span className="font-medium">Position:</span> {employee.position}</p>
+              <p>
+                <span className="font-medium">Name:</span> {employee.name}
+              </p>
+              <p>
+                <span className="font-medium">Employee ID:</span> {employee.id}
+              </p>
+              <p>
+                <span className="font-medium">Department:</span>{" "}
+                {employee.department}
+              </p>
+              <p>
+                <span className="font-medium">Position:</span>{" "}
+                {employee.position}
+              </p>
               {employee.address && (
-                <p><span className="font-medium">Address:</span> {employee.address}</p>
+                <p>
+                  <span className="font-medium">Address:</span>{" "}
+                  {employee.address}
+                </p>
               )}
             </div>
           </div>
@@ -103,9 +122,17 @@ export function PayStub({
           <div>
             <h3 className="font-semibold mb-3">Pay Period Information</h3>
             <div className="space-y-1 text-sm">
-              <p><span className="font-medium">Pay Period:</span> {payPeriod.start} - {payPeriod.end}</p>
-              <p><span className="font-medium">Pay Date:</span> {new Date(payPeriod.payDate).toLocaleDateString()}</p>
-              <p><span className="font-medium">Pay Method:</span> Direct Deposit</p>
+              <p>
+                <span className="font-medium">Pay Period:</span>{" "}
+                {payPeriod.start} - {payPeriod.end}
+              </p>
+              <p>
+                <span className="font-medium">Pay Date:</span>{" "}
+                {new Date(payPeriod.payDate).toLocaleDateString()}
+              </p>
+              <p>
+                <span className="font-medium">Pay Method:</span> Direct Deposit
+              </p>
             </div>
           </div>
         </div>
@@ -126,16 +153,24 @@ export function PayStub({
             <div className="grid grid-cols-4 gap-4 text-sm">
               <div>Regular Pay</div>
               <div className="text-right">{earnings.regularHours}</div>
-              <div className="text-right">${earnings.regularRate.toFixed(2)}</div>
-              <div className="text-right">${earnings.regularPay.toFixed(2)}</div>
+              <div className="text-right">
+                ${earnings.regularRate.toFixed(2)}
+              </div>
+              <div className="text-right">
+                ${earnings.regularPay.toFixed(2)}
+              </div>
             </div>
 
             {earnings.overtimeHours > 0 && (
               <div className="grid grid-cols-4 gap-4 text-sm">
                 <div>Overtime Pay</div>
                 <div className="text-right">{earnings.overtimeHours}</div>
-                <div className="text-right">${earnings.overtimeRate.toFixed(2)}</div>
-                <div className="text-right">${earnings.overtimePay.toFixed(2)}</div>
+                <div className="text-right">
+                  ${earnings.overtimeRate.toFixed(2)}
+                </div>
+                <div className="text-right">
+                  ${earnings.overtimePay.toFixed(2)}
+                </div>
               </div>
             )}
 
@@ -153,7 +188,9 @@ export function PayStub({
                 <div>Commission</div>
                 <div className="text-right">-</div>
                 <div className="text-right">-</div>
-                <div className="text-right">${earnings.commissions.toFixed(2)}</div>
+                <div className="text-right">
+                  ${earnings.commissions.toFixed(2)}
+                </div>
               </div>
             )}
 
@@ -174,7 +211,9 @@ export function PayStub({
           <div className="space-y-3">
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <h4 className="font-medium mb-3 text-muted-foreground">Tax Deductions</h4>
+                <h4 className="font-medium mb-3 text-muted-foreground">
+                  Tax Deductions
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>Federal Income Tax</span>
@@ -196,7 +235,9 @@ export function PayStub({
               </div>
 
               <div>
-                <h4 className="font-medium mb-3 text-muted-foreground">Benefit Deductions</h4>
+                <h4 className="font-medium mb-3 text-muted-foreground">
+                  Benefit Deductions
+                </h4>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span>Health Insurance</span>
@@ -228,7 +269,9 @@ export function PayStub({
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold">Net Pay</h3>
             <div className="text-right">
-              <p className="text-2xl font-bold text-primary">${netPay.toFixed(2)}</p>
+              <p className="text-2xl font-bold text-primary">
+                ${netPay.toFixed(2)}
+              </p>
               <p className="text-sm text-muted-foreground">This Period</p>
             </div>
           </div>
@@ -242,23 +285,34 @@ export function PayStub({
           <div className="grid grid-cols-3 gap-6">
             <div className="text-center p-4 border rounded-lg">
               <p className="text-sm text-muted-foreground">YTD Gross Pay</p>
-              <p className="text-xl font-bold">${ytdTotals.grossPay.toLocaleString()}</p>
+              <p className="text-xl font-bold">
+                ${ytdTotals.grossPay.toLocaleString()}
+              </p>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <p className="text-sm text-muted-foreground">YTD Deductions</p>
-              <p className="text-xl font-bold">${ytdTotals.totalDeductions.toLocaleString()}</p>
+              <p className="text-xl font-bold">
+                ${ytdTotals.totalDeductions.toLocaleString()}
+              </p>
             </div>
             <div className="text-center p-4 border rounded-lg">
               <p className="text-sm text-muted-foreground">YTD Net Pay</p>
-              <p className="text-xl font-bold">${ytdTotals.netPay.toLocaleString()}</p>
+              <p className="text-xl font-bold">
+                ${ytdTotals.netPay.toLocaleString()}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Footer */}
         <div className="pt-6 border-t text-center text-xs text-muted-foreground">
-          <p>This is an official pay statement. Please retain for your records.</p>
-          <p>Questions about your pay? Contact HR at hr@company.com or (555) 123-4567</p>
+          <p>
+            This is an official pay statement. Please retain for your records.
+          </p>
+          <p>
+            Questions about your pay? Contact HR at hr@company.com or (555)
+            123-4567
+          </p>
         </div>
       </CardContent>
     </Card>

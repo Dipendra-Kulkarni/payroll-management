@@ -5,10 +5,13 @@ import React from "react";
 const originalWarn = console.warn;
 console.warn = (...args) => {
   const message = args[0];
-  if (typeof message === 'string' && (
-    message.includes('defaultProps will be removed from function components') ||
-    message.includes('Support for defaultProps will be removed')
-  )) {
+  if (
+    typeof message === "string" &&
+    (message.includes(
+      "defaultProps will be removed from function components",
+    ) ||
+      message.includes("Support for defaultProps will be removed"))
+  ) {
     return;
   }
   originalWarn.apply(console, args);

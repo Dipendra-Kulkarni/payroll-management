@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Switch } from '@/components/ui/switch';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Building,
   User,
@@ -36,63 +48,63 @@ import {
   Settings as SettingsIcon,
   Trash2,
   Plus,
-  ExternalLink
-} from 'lucide-react';
+  ExternalLink,
+} from "lucide-react";
 
 const timezones = [
-  'UTC-12:00 Baker Island',
-  'UTC-11:00 American Samoa',
-  'UTC-10:00 Hawaii',
-  'UTC-09:00 Alaska',
-  'UTC-08:00 Pacific Time',
-  'UTC-07:00 Mountain Time',
-  'UTC-06:00 Central Time',
-  'UTC-05:00 Eastern Time',
-  'UTC-04:00 Atlantic Time',
-  'UTC+00:00 GMT/UTC',
-  'UTC+01:00 Central European Time',
-  'UTC+02:00 Eastern European Time',
-  'UTC+08:00 China Standard Time',
-  'UTC+09:00 Japan Standard Time',
+  "UTC-12:00 Baker Island",
+  "UTC-11:00 American Samoa",
+  "UTC-10:00 Hawaii",
+  "UTC-09:00 Alaska",
+  "UTC-08:00 Pacific Time",
+  "UTC-07:00 Mountain Time",
+  "UTC-06:00 Central Time",
+  "UTC-05:00 Eastern Time",
+  "UTC-04:00 Atlantic Time",
+  "UTC+00:00 GMT/UTC",
+  "UTC+01:00 Central European Time",
+  "UTC+02:00 Eastern European Time",
+  "UTC+08:00 China Standard Time",
+  "UTC+09:00 Japan Standard Time",
 ];
 
 const integrations = [
   {
-    id: 'slack',
-    name: 'Slack',
-    description: 'Get notifications and updates in Slack',
+    id: "slack",
+    name: "Slack",
+    description: "Get notifications and updates in Slack",
     icon: Slack,
     connected: true,
-    lastSync: '2 minutes ago'
+    lastSync: "2 minutes ago",
   },
   {
-    id: 'google-calendar',
-    name: 'Google Calendar',
-    description: 'Sync schedules with Google Calendar',
+    id: "google-calendar",
+    name: "Google Calendar",
+    description: "Sync schedules with Google Calendar",
     icon: Calendar,
     connected: true,
-    lastSync: '1 hour ago'
+    lastSync: "1 hour ago",
   },
   {
-    id: 'payroll',
-    name: 'Payroll System',
-    description: 'Integrate with payroll processing',
+    id: "payroll",
+    name: "Payroll System",
+    description: "Integrate with payroll processing",
     icon: DollarSign,
     connected: false,
-    lastSync: null
+    lastSync: null,
   },
   {
-    id: 'database',
-    name: 'External Database',
-    description: 'Connect to external HR database',
+    id: "database",
+    name: "External Database",
+    description: "Connect to external HR database",
     icon: Database,
     connected: false,
-    lastSync: null
-  }
+    lastSync: null,
+  },
 ];
 
 export default function Settings() {
-  const [selectedTab, setSelectedTab] = useState('company');
+  const [selectedTab, setSelectedTab] = useState("company");
   const [showPassword, setShowPassword] = useState(false);
   const [notifications, setNotifications] = useState({
     email: true,
@@ -102,43 +114,43 @@ export default function Settings() {
     overtime: true,
     scheduleChanges: true,
     leaveRequests: true,
-    teamUpdates: false
+    teamUpdates: false,
   });
 
   const [companyInfo, setCompanyInfo] = useState({
-    name: 'Acme Corporation',
-    address: '123 Business Street, City, State 12345',
-    phone: '+1 (555) 123-4567',
-    email: 'contact@acme.com',
-    website: 'www.acme.com',
-    timezone: 'UTC-05:00 Eastern Time',
+    name: "Acme Corporation",
+    address: "123 Business Street, City, State 12345",
+    phone: "+1 (555) 123-4567",
+    email: "contact@acme.com",
+    website: "www.acme.com",
+    timezone: "UTC-05:00 Eastern Time",
     workingHours: {
-      start: '09:00',
-      end: '17:00'
-    }
+      start: "09:00",
+      end: "17:00",
+    },
   });
 
   const [userPrefs, setUserPrefs] = useState({
-    name: 'John Doe',
-    email: 'john.doe@acme.com',
-    department: 'Management',
-    role: 'Manager',
-    timezone: 'UTC-05:00 Eastern Time',
-    dateFormat: 'MM/DD/YYYY',
-    timeFormat: '12-hour',
-    theme: 'system'
+    name: "John Doe",
+    email: "john.doe@acme.com",
+    department: "Management",
+    role: "Manager",
+    timezone: "UTC-05:00 Eastern Time",
+    dateFormat: "MM/DD/YYYY",
+    timeFormat: "12-hour",
+    theme: "system",
   });
 
   const [security, setSecurity] = useState({
     twoFactor: true,
-    sessionTimeout: '8',
+    sessionTimeout: "8",
     loginAlerts: true,
-    passwordExpiry: '90',
-    accessLevel: 'admin'
+    passwordExpiry: "90",
+    accessLevel: "admin",
   });
 
   const handleNotificationChange = (key: string, value: boolean) => {
-    setNotifications(prev => ({ ...prev, [key]: value }));
+    setNotifications((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSave = (section: string) => {
@@ -172,7 +184,10 @@ export default function Settings() {
             <User className="h-4 w-4" />
             User
           </TabsTrigger>
-          <TabsTrigger value="notifications" className="flex items-center gap-2">
+          <TabsTrigger
+            value="notifications"
+            className="flex items-center gap-2"
+          >
             <Bell className="h-4 w-4" />
             Notifications
           </TabsTrigger>
@@ -202,7 +217,12 @@ export default function Settings() {
                   <Input
                     id="company-name"
                     value={companyInfo.name}
-                    onChange={(e) => setCompanyInfo(prev => ({ ...prev, name: e.target.value }))}
+                    onChange={(e) =>
+                      setCompanyInfo((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -211,7 +231,12 @@ export default function Settings() {
                     id="company-email"
                     type="email"
                     value={companyInfo.email}
-                    onChange={(e) => setCompanyInfo(prev => ({ ...prev, email: e.target.value }))}
+                    onChange={(e) =>
+                      setCompanyInfo((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                   />
                 </div>
               </div>
@@ -221,7 +246,12 @@ export default function Settings() {
                 <Textarea
                   id="company-address"
                   value={companyInfo.address}
-                  onChange={(e) => setCompanyInfo(prev => ({ ...prev, address: e.target.value }))}
+                  onChange={(e) =>
+                    setCompanyInfo((prev) => ({
+                      ...prev,
+                      address: e.target.value,
+                    }))
+                  }
                   rows={2}
                 />
               </div>
@@ -232,7 +262,12 @@ export default function Settings() {
                   <Input
                     id="company-phone"
                     value={companyInfo.phone}
-                    onChange={(e) => setCompanyInfo(prev => ({ ...prev, phone: e.target.value }))}
+                    onChange={(e) =>
+                      setCompanyInfo((prev) => ({
+                        ...prev,
+                        phone: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -240,7 +275,12 @@ export default function Settings() {
                   <Input
                     id="company-website"
                     value={companyInfo.website}
-                    onChange={(e) => setCompanyInfo(prev => ({ ...prev, website: e.target.value }))}
+                    onChange={(e) =>
+                      setCompanyInfo((prev) => ({
+                        ...prev,
+                        website: e.target.value,
+                      }))
+                    }
                   />
                 </div>
               </div>
@@ -248,17 +288,26 @@ export default function Settings() {
               <Separator />
 
               <div className="space-y-4">
-                <h3 className="text-lg font-medium">Working Hours & Timezone</h3>
-                
+                <h3 className="text-lg font-medium">
+                  Working Hours & Timezone
+                </h3>
+
                 <div className="space-y-2">
                   <Label htmlFor="timezone">Company Timezone</Label>
-                  <Select value={companyInfo.timezone} onValueChange={(value) => setCompanyInfo(prev => ({ ...prev, timezone: value }))}>
+                  <Select
+                    value={companyInfo.timezone}
+                    onValueChange={(value) =>
+                      setCompanyInfo((prev) => ({ ...prev, timezone: value }))
+                    }
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       {timezones.map((tz) => (
-                        <SelectItem key={tz} value={tz}>{tz}</SelectItem>
+                        <SelectItem key={tz} value={tz}>
+                          {tz}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -271,10 +320,15 @@ export default function Settings() {
                       id="work-start"
                       type="time"
                       value={companyInfo.workingHours.start}
-                      onChange={(e) => setCompanyInfo(prev => ({ 
-                        ...prev, 
-                        workingHours: { ...prev.workingHours, start: e.target.value }
-                      }))}
+                      onChange={(e) =>
+                        setCompanyInfo((prev) => ({
+                          ...prev,
+                          workingHours: {
+                            ...prev.workingHours,
+                            start: e.target.value,
+                          },
+                        }))
+                      }
                     />
                   </div>
                   <div className="space-y-2">
@@ -283,17 +337,22 @@ export default function Settings() {
                       id="work-end"
                       type="time"
                       value={companyInfo.workingHours.end}
-                      onChange={(e) => setCompanyInfo(prev => ({ 
-                        ...prev, 
-                        workingHours: { ...prev.workingHours, end: e.target.value }
-                      }))}
+                      onChange={(e) =>
+                        setCompanyInfo((prev) => ({
+                          ...prev,
+                          workingHours: {
+                            ...prev.workingHours,
+                            end: e.target.value,
+                          },
+                        }))
+                      }
                     />
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => handleSave('company')}>
+                <Button onClick={() => handleSave("company")}>
                   Save Company Settings
                 </Button>
               </div>
@@ -333,7 +392,12 @@ export default function Settings() {
                   <Input
                     id="user-name"
                     value={userPrefs.name}
-                    onChange={(e) => setUserPrefs(prev => ({ ...prev, name: e.target.value }))}
+                    onChange={(e) =>
+                      setUserPrefs((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <div className="space-y-2">
@@ -342,7 +406,12 @@ export default function Settings() {
                     id="user-email"
                     type="email"
                     value={userPrefs.email}
-                    onChange={(e) => setUserPrefs(prev => ({ ...prev, email: e.target.value }))}
+                    onChange={(e) =>
+                      setUserPrefs((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                   />
                 </div>
               </div>
@@ -350,7 +419,12 @@ export default function Settings() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="user-department">Department</Label>
-                  <Select value={userPrefs.department} onValueChange={(value) => setUserPrefs(prev => ({ ...prev, department: value }))}>
+                  <Select
+                    value={userPrefs.department}
+                    onValueChange={(value) =>
+                      setUserPrefs((prev) => ({ ...prev, department: value }))
+                    }
+                  >
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -368,7 +442,12 @@ export default function Settings() {
                   <Input
                     id="user-role"
                     value={userPrefs.role}
-                    onChange={(e) => setUserPrefs(prev => ({ ...prev, role: e.target.value }))}
+                    onChange={(e) =>
+                      setUserPrefs((prev) => ({
+                        ...prev,
+                        role: e.target.value,
+                      }))
+                    }
                   />
                 </div>
               </div>
@@ -377,25 +456,37 @@ export default function Settings() {
 
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Display Preferences</h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="user-timezone">Your Timezone</Label>
-                    <Select value={userPrefs.timezone} onValueChange={(value) => setUserPrefs(prev => ({ ...prev, timezone: value }))}>
+                    <Select
+                      value={userPrefs.timezone}
+                      onValueChange={(value) =>
+                        setUserPrefs((prev) => ({ ...prev, timezone: value }))
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         {timezones.map((tz) => (
-                          <SelectItem key={tz} value={tz}>{tz}</SelectItem>
+                          <SelectItem key={tz} value={tz}>
+                            {tz}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="date-format">Date Format</Label>
-                    <Select value={userPrefs.dateFormat} onValueChange={(value) => setUserPrefs(prev => ({ ...prev, dateFormat: value }))}>
+                    <Select
+                      value={userPrefs.dateFormat}
+                      onValueChange={(value) =>
+                        setUserPrefs((prev) => ({ ...prev, dateFormat: value }))
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -406,10 +497,15 @@ export default function Settings() {
                       </SelectContent>
                     </Select>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="time-format">Time Format</Label>
-                    <Select value={userPrefs.timeFormat} onValueChange={(value) => setUserPrefs(prev => ({ ...prev, timeFormat: value }))}>
+                    <Select
+                      value={userPrefs.timeFormat}
+                      onValueChange={(value) =>
+                        setUserPrefs((prev) => ({ ...prev, timeFormat: value }))
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -423,7 +519,12 @@ export default function Settings() {
 
                 <div className="space-y-2">
                   <Label htmlFor="theme">Theme</Label>
-                  <Select value={userPrefs.theme} onValueChange={(value) => setUserPrefs(prev => ({ ...prev, theme: value }))}>
+                  <Select
+                    value={userPrefs.theme}
+                    onValueChange={(value) =>
+                      setUserPrefs((prev) => ({ ...prev, theme: value }))
+                    }
+                  >
                     <SelectTrigger className="w-48">
                       <SelectValue />
                     </SelectTrigger>
@@ -437,7 +538,7 @@ export default function Settings() {
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => handleSave('user')}>
+                <Button onClick={() => handleSave("user")}>
                   Save User Preferences
                 </Button>
               </div>
@@ -458,7 +559,7 @@ export default function Settings() {
               {/* Notification Channels */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Notification Channels</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -472,7 +573,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.email}
-                      onCheckedChange={(checked) => handleNotificationChange('email', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("email", checked)
+                      }
                     />
                   </div>
 
@@ -488,7 +591,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.push}
-                      onCheckedChange={(checked) => handleNotificationChange('push', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("push", checked)
+                      }
                     />
                   </div>
 
@@ -504,7 +609,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.slack}
-                      onCheckedChange={(checked) => handleNotificationChange('slack', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("slack", checked)
+                      }
                     />
                   </div>
                 </div>
@@ -515,7 +622,7 @@ export default function Settings() {
               {/* Notification Types */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Notification Types</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
@@ -529,7 +636,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.breaks}
-                      onCheckedChange={(checked) => handleNotificationChange('breaks', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("breaks", checked)
+                      }
                     />
                   </div>
 
@@ -545,7 +654,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.overtime}
-                      onCheckedChange={(checked) => handleNotificationChange('overtime', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("overtime", checked)
+                      }
                     />
                   </div>
 
@@ -561,7 +672,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.scheduleChanges}
-                      onCheckedChange={(checked) => handleNotificationChange('scheduleChanges', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("scheduleChanges", checked)
+                      }
                     />
                   </div>
 
@@ -577,7 +690,9 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.leaveRequests}
-                      onCheckedChange={(checked) => handleNotificationChange('leaveRequests', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("leaveRequests", checked)
+                      }
                     />
                   </div>
 
@@ -593,14 +708,16 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={notifications.teamUpdates}
-                      onCheckedChange={(checked) => handleNotificationChange('teamUpdates', checked)}
+                      onCheckedChange={(checked) =>
+                        handleNotificationChange("teamUpdates", checked)
+                      }
                     />
                   </div>
                 </div>
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => handleSave('notifications')}>
+                <Button onClick={() => handleSave("notifications")}>
                   Save Notification Settings
                 </Button>
               </div>
@@ -622,7 +739,10 @@ export default function Settings() {
                 {integrations.map((integration) => {
                   const IconComponent = integration.icon;
                   return (
-                    <div key={integration.id} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div
+                      key={integration.id}
+                      className="flex items-center justify-between p-4 border rounded-lg"
+                    >
                       <div className="flex items-center gap-4">
                         <div className="p-2 bg-muted rounded-lg">
                           <IconComponent className="h-6 w-6" />
@@ -639,11 +759,14 @@ export default function Settings() {
                           )}
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center gap-2">
                         {integration.connected ? (
                           <>
-                            <Badge variant="default" className="bg-success text-white">
+                            <Badge
+                              variant="default"
+                              className="bg-success text-white"
+                            >
                               <CheckCircle className="h-3 w-3 mr-1" />
                               Connected
                             </Badge>
@@ -657,9 +780,7 @@ export default function Settings() {
                           </>
                         ) : (
                           <>
-                            <Badge variant="secondary">
-                              Not Connected
-                            </Badge>
+                            <Badge variant="secondary">Not Connected</Badge>
                             <Button size="sm">
                               <Plus className="h-4 w-4 mr-1" />
                               Connect
@@ -689,12 +810,16 @@ export default function Settings() {
                       Generate Key
                     </Button>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <div className="flex items-center justify-between p-2 bg-muted rounded">
                       <div>
-                        <p className="text-sm font-medium">Production API Key</p>
-                        <p className="text-xs text-muted-foreground">Last used: 2 hours ago</p>
+                        <p className="text-sm font-medium">
+                          Production API Key
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          Last used: 2 hours ago
+                        </p>
                       </div>
                       <div className="flex gap-1">
                         <Button variant="ghost" size="sm">
@@ -710,7 +835,7 @@ export default function Settings() {
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => handleSave('integrations')}>
+                <Button onClick={() => handleSave("integrations")}>
                   Save Integration Settings
                 </Button>
               </div>
@@ -731,7 +856,7 @@ export default function Settings() {
               {/* Authentication */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Authentication</h3>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <div>
@@ -743,10 +868,18 @@ export default function Settings() {
                     <div className="flex items-center gap-2">
                       <Switch
                         checked={security.twoFactor}
-                        onCheckedChange={(checked) => setSecurity(prev => ({ ...prev, twoFactor: checked }))}
+                        onCheckedChange={(checked) =>
+                          setSecurity((prev) => ({
+                            ...prev,
+                            twoFactor: checked,
+                          }))
+                        }
                       />
                       {security.twoFactor && (
-                        <Badge variant="default" className="bg-success text-white">
+                        <Badge
+                          variant="default"
+                          className="bg-success text-white"
+                        >
                           Enabled
                         </Badge>
                       )}
@@ -754,8 +887,18 @@ export default function Settings() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="session-timeout">Session Timeout (hours)</Label>
-                    <Select value={security.sessionTimeout} onValueChange={(value) => setSecurity(prev => ({ ...prev, sessionTimeout: value }))}>
+                    <Label htmlFor="session-timeout">
+                      Session Timeout (hours)
+                    </Label>
+                    <Select
+                      value={security.sessionTimeout}
+                      onValueChange={(value) =>
+                        setSecurity((prev) => ({
+                          ...prev,
+                          sessionTimeout: value,
+                        }))
+                      }
+                    >
                       <SelectTrigger className="w-48">
                         <SelectValue />
                       </SelectTrigger>
@@ -778,7 +921,12 @@ export default function Settings() {
                     </div>
                     <Switch
                       checked={security.loginAlerts}
-                      onCheckedChange={(checked) => setSecurity(prev => ({ ...prev, loginAlerts: checked }))}
+                      onCheckedChange={(checked) =>
+                        setSecurity((prev) => ({
+                          ...prev,
+                          loginAlerts: checked,
+                        }))
+                      }
                     />
                   </div>
                 </div>
@@ -789,11 +937,21 @@ export default function Settings() {
               {/* Password Policy */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Password Policy</h3>
-                
+
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="password-expiry">Password Expiry (days)</Label>
-                    <Select value={security.passwordExpiry} onValueChange={(value) => setSecurity(prev => ({ ...prev, passwordExpiry: value }))}>
+                    <Label htmlFor="password-expiry">
+                      Password Expiry (days)
+                    </Label>
+                    <Select
+                      value={security.passwordExpiry}
+                      onValueChange={(value) =>
+                        setSecurity((prev) => ({
+                          ...prev,
+                          passwordExpiry: value,
+                        }))
+                      }
+                    >
                       <SelectTrigger className="w-48">
                         <SelectValue />
                       </SelectTrigger>
@@ -842,7 +1000,9 @@ export default function Settings() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="confirm-password">Confirm New Password</Label>
+                    <Label htmlFor="confirm-password">
+                      Confirm New Password
+                    </Label>
                     <Input
                       id="confirm-password"
                       type="password"
@@ -862,10 +1022,15 @@ export default function Settings() {
               {/* Access Control */}
               <div className="space-y-4">
                 <h3 className="text-lg font-medium">Access Control</h3>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="access-level">Access Level</Label>
-                  <Select value={security.accessLevel} onValueChange={(value) => setSecurity(prev => ({ ...prev, accessLevel: value }))}>
+                  <Select
+                    value={security.accessLevel}
+                    onValueChange={(value) =>
+                      setSecurity((prev) => ({ ...prev, accessLevel: value }))
+                    }
+                  >
                     <SelectTrigger className="w-48">
                       <SelectValue />
                     </SelectTrigger>
@@ -902,7 +1067,7 @@ export default function Settings() {
               </div>
 
               <div className="flex justify-end">
-                <Button onClick={() => handleSave('security')}>
+                <Button onClick={() => handleSave("security")}>
                   Save Security Settings
                 </Button>
               </div>

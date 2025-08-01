@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { NotificationSystem } from './NotificationSystem';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { NotificationSystem } from "./NotificationSystem";
 import {
   Clock,
   Calendar,
@@ -17,28 +17,28 @@ import {
   UserCheck,
   FileText,
   DollarSign,
-  User
-} from 'lucide-react';
+  User,
+} from "lucide-react";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const navigation = [
-  { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Time Clock', href: '/clock', icon: Clock },
-  { name: 'Schedule', href: '/schedule', icon: Calendar },
-  { name: 'Leave Requests', href: '/leave', icon: ClipboardList },
-  { name: 'Payroll', href: '/payroll', icon: DollarSign },
-  { name: 'Employee Portal', href: '/employee-portal', icon: User },
-  { name: 'Team', href: '/team', icon: Users },
-  { name: 'Reports', href: '/reports', icon: BarChart3 },
-  { name: 'Attendance', href: '/attendance', icon: UserCheck },
-  { name: 'Timesheets', href: '/timesheets', icon: FileText },
+  { name: "Dashboard", href: "/", icon: Home },
+  { name: "Time Clock", href: "/clock", icon: Clock },
+  { name: "Schedule", href: "/schedule", icon: Calendar },
+  { name: "Leave Requests", href: "/leave", icon: ClipboardList },
+  { name: "Payroll", href: "/payroll", icon: DollarSign },
+  { name: "Employee Portal", href: "/employee-portal", icon: User },
+  { name: "Team", href: "/team", icon: Users },
+  { name: "Reports", href: "/reports", icon: BarChart3 },
+  { name: "Attendance", href: "/attendance", icon: UserCheck },
+  { name: "Timesheets", href: "/timesheets", icon: FileText },
 ];
 
 const adminNavigation = [
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { name: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function Layout({ children }: LayoutProps) {
@@ -50,8 +50,8 @@ export function Layout({ children }: LayoutProps) {
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div 
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm" 
+          <div
+            className="fixed inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
           <div className="fixed inset-y-0 left-0 z-50 w-64 bg-card border-r">
@@ -82,7 +82,7 @@ export function Layout({ children }: LayoutProps) {
 
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1" />
-            
+
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               {/* Notifications */}
               <NotificationSystem />
@@ -103,9 +103,7 @@ export function Layout({ children }: LayoutProps) {
         </div>
 
         {/* Main content area */}
-        <main className="py-6 px-4 sm:px-6 lg:px-8">
-          {children}
-        </main>
+        <main className="py-6 px-4 sm:px-6 lg:px-8">{children}</main>
       </div>
     </div>
   );
@@ -140,15 +138,17 @@ function SidebarContent({ location }: { location: any }) {
                       to={item.href}
                       className={cn(
                         isActive
-                          ? 'bg-primary text-primary-foreground'
-                          : 'text-foreground hover:bg-muted',
-                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium transition-colors'
+                          ? "bg-primary text-primary-foreground"
+                          : "text-foreground hover:bg-muted",
+                        "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium transition-colors",
                       )}
                     >
                       <item.icon
                         className={cn(
-                          isActive ? 'text-primary-foreground' : 'text-muted-foreground',
-                          'h-5 w-5 shrink-0'
+                          isActive
+                            ? "text-primary-foreground"
+                            : "text-muted-foreground",
+                          "h-5 w-5 shrink-0",
                         )}
                       />
                       {item.name}
@@ -158,7 +158,7 @@ function SidebarContent({ location }: { location: any }) {
               })}
             </ul>
           </li>
-          
+
           <li>
             <div className="text-xs font-semibold leading-6 text-muted-foreground">
               Administration
@@ -172,15 +172,17 @@ function SidebarContent({ location }: { location: any }) {
                       to={item.href}
                       className={cn(
                         isActive
-                          ? 'bg-primary text-primary-foreground'
-                          : 'text-foreground hover:bg-muted',
-                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium transition-colors'
+                          ? "bg-primary text-primary-foreground"
+                          : "text-foreground hover:bg-muted",
+                        "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-medium transition-colors",
                       )}
                     >
                       <item.icon
                         className={cn(
-                          isActive ? 'text-primary-foreground' : 'text-muted-foreground',
-                          'h-5 w-5 shrink-0'
+                          isActive
+                            ? "text-primary-foreground"
+                            : "text-muted-foreground",
+                          "h-5 w-5 shrink-0",
                         )}
                       />
                       {item.name}
@@ -198,12 +200,8 @@ function SidebarContent({ location }: { location: any }) {
                 <div className="h-2 w-2 rounded-full bg-success animate-pulse" />
                 <span className="text-xs font-medium">Clocked In</span>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Started: 9:00 AM
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Duration: 2h 15m
-              </p>
+              <p className="text-xs text-muted-foreground">Started: 9:00 AM</p>
+              <p className="text-xs text-muted-foreground">Duration: 2h 15m</p>
             </div>
           </li>
         </ul>

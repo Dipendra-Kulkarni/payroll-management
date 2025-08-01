@@ -1,7 +1,13 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Construction, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Construction, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface PlaceholderPageProps {
   title: string;
@@ -9,10 +15,10 @@ interface PlaceholderPageProps {
   features?: string[];
 }
 
-export default function PlaceholderPage({ 
-  title, 
-  description, 
-  features = [] 
+export default function PlaceholderPage({
+  title,
+  description,
+  features = [],
 }: PlaceholderPageProps) {
   return (
     <div className="space-y-6">
@@ -52,14 +58,12 @@ export default function PlaceholderPage({
               </ul>
             </div>
           )}
-          
+
           <div className="pt-4">
             <p className="text-sm text-muted-foreground mb-4">
               Want to request specific functionality for this page?
             </p>
-            <Button variant="outline">
-              Contact Support
-            </Button>
+            <Button variant="outline">Contact Support</Button>
           </div>
         </CardContent>
       </Card>

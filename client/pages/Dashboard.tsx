@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import React, { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Clock,
   Play,
@@ -17,39 +23,74 @@ import {
   Coffee,
   MapPin,
   ChevronRight,
-  DollarSign
-} from 'lucide-react';
+  DollarSign,
+} from "lucide-react";
 
 const timeEntries = [
-  { date: 'Today', hours: 6.5, status: 'in-progress' },
-  { date: 'Yesterday', hours: 8.0, status: 'completed' },
-  { date: 'Monday', hours: 7.5, status: 'completed' },
-  { date: 'Friday', hours: 8.0, status: 'completed' },
+  { date: "Today", hours: 6.5, status: "in-progress" },
+  { date: "Yesterday", hours: 8.0, status: "completed" },
+  { date: "Monday", hours: 7.5, status: "completed" },
+  { date: "Friday", hours: 8.0, status: "completed" },
 ];
 
 const upcomingSchedule = [
-  { time: '9:00 AM', task: 'Team Standup', type: 'meeting' },
-  { time: '11:30 AM', task: 'Client Review', type: 'meeting' },
-  { time: '2:00 PM', task: 'Project Planning', type: 'work' },
-  { time: '4:30 PM', task: 'Code Review', type: 'review' },
+  { time: "9:00 AM", task: "Team Standup", type: "meeting" },
+  { time: "11:30 AM", task: "Client Review", type: "meeting" },
+  { time: "2:00 PM", task: "Project Planning", type: "work" },
+  { time: "4:30 PM", task: "Code Review", type: "review" },
 ];
 
 const teamStatus = [
-  { name: 'Sarah Wilson', status: 'working', avatar: '/placeholder.svg', time: '2h 30m' },
-  { name: 'Mike Chen', status: 'break', avatar: '/placeholder.svg', time: '15m' },
-  { name: 'Emily Davis', status: 'working', avatar: '/placeholder.svg', time: '4h 15m' },
-  { name: 'Tom Johnson', status: 'offline', avatar: '/placeholder.svg', time: '' },
+  {
+    name: "Sarah Wilson",
+    status: "working",
+    avatar: "/placeholder.svg",
+    time: "2h 30m",
+  },
+  {
+    name: "Mike Chen",
+    status: "break",
+    avatar: "/placeholder.svg",
+    time: "15m",
+  },
+  {
+    name: "Emily Davis",
+    status: "working",
+    avatar: "/placeholder.svg",
+    time: "4h 15m",
+  },
+  {
+    name: "Tom Johnson",
+    status: "offline",
+    avatar: "/placeholder.svg",
+    time: "",
+  },
 ];
 
 const pendingRequests = [
-  { employee: 'Sarah Wilson', type: 'Vacation', dates: 'Dec 20-22', status: 'pending' },
-  { employee: 'Mike Chen', type: 'Sick Leave', dates: 'Dec 18', status: 'approved' },
-  { employee: 'Emily Davis', type: 'Personal', dates: 'Dec 25', status: 'pending' },
+  {
+    employee: "Sarah Wilson",
+    type: "Vacation",
+    dates: "Dec 20-22",
+    status: "pending",
+  },
+  {
+    employee: "Mike Chen",
+    type: "Sick Leave",
+    dates: "Dec 18",
+    status: "approved",
+  },
+  {
+    employee: "Emily Davis",
+    type: "Personal",
+    dates: "Dec 25",
+    status: "pending",
+  },
 ];
 
 export default function Dashboard() {
   const [isWorking, setIsWorking] = useState(true);
-  const [currentSession, setCurrentSession] = useState('2h 15m');
+  const [currentSession, setCurrentSession] = useState("2h 15m");
 
   const handleClockToggle = () => {
     setIsWorking(!isWorking);
@@ -67,7 +108,10 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Badge variant="outline" className="bg-success/10 text-success border-success/20">
+          <Badge
+            variant="outline"
+            className="bg-success/10 text-success border-success/20"
+          >
             <div className="h-1.5 w-1.5 rounded-full bg-success mr-1" />
             Online
           </Badge>
@@ -81,9 +125,7 @@ export default function Dashboard() {
             <Clock className="h-5 w-5 text-primary" />
             Time Clock
           </CardTitle>
-          <CardDescription>
-            Current session and quick actions
-          </CardDescription>
+          <CardDescription>Current session and quick actions</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
@@ -93,7 +135,9 @@ export default function Dashboard() {
                   {currentSession}
                 </div>
                 <div className="space-y-1">
-                  <p className="text-sm text-muted-foreground">Current session</p>
+                  <p className="text-sm text-muted-foreground">
+                    Current session
+                  </p>
                   <p className="text-sm">Started: 9:00 AM</p>
                 </div>
               </div>
@@ -121,7 +165,11 @@ export default function Dashboard() {
                   </>
                 )}
               </Button>
-              <Button variant="outline" size="lg" className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="lg"
+                className="flex items-center gap-2"
+              >
                 <Coffee className="h-4 w-4" />
                 Break
               </Button>
@@ -153,9 +201,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">$2,850</div>
-            <p className="text-xs text-muted-foreground">
-              Current period
-            </p>
+            <p className="text-xs text-muted-foreground">Current period</p>
             <Badge variant="outline" className="mt-2 text-xs">
               On track
             </Badge>
@@ -169,9 +215,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">2.5h</div>
-            <p className="text-xs text-muted-foreground">
-              This week
-            </p>
+            <p className="text-xs text-muted-foreground">This week</p>
             <Badge variant="outline" className="mt-2 text-xs">
               Under limit
             </Badge>
@@ -185,14 +229,14 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">
-              out of 16 members
-            </p>
+            <p className="text-xs text-muted-foreground">out of 16 members</p>
             <div className="flex -space-x-1 mt-2">
               {teamStatus.slice(0, 4).map((member, i) => (
                 <Avatar key={i} className="h-6 w-6 border-2 border-background">
                   <AvatarImage src={member.avatar} />
-                  <AvatarFallback className="text-xs">{member.name.slice(0, 2)}</AvatarFallback>
+                  <AvatarFallback className="text-xs">
+                    {member.name.slice(0, 2)}
+                  </AvatarFallback>
                 </Avatar>
               ))}
             </div>
@@ -201,14 +245,14 @@ export default function Dashboard() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pending Requests</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              Pending Requests
+            </CardTitle>
             <AlertCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">3</div>
-            <p className="text-xs text-muted-foreground">
-              Need approval
-            </p>
+            <p className="text-xs text-muted-foreground">Need approval</p>
             <Badge variant="destructive" className="mt-2 text-xs">
               Action needed
             </Badge>
@@ -227,19 +271,25 @@ export default function Dashboard() {
             {timeEntries.map((entry, index) => (
               <div key={index} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className={`h-2 w-2 rounded-full ${
-                    entry.status === 'in-progress' ? 'bg-primary animate-pulse' : 'bg-success'
-                  }`} />
+                  <div
+                    className={`h-2 w-2 rounded-full ${
+                      entry.status === "in-progress"
+                        ? "bg-primary animate-pulse"
+                        : "bg-success"
+                    }`}
+                  />
                   <div>
                     <p className="text-sm font-medium">{entry.date}</p>
                     <p className="text-xs text-muted-foreground">
-                      {entry.status === 'in-progress' ? 'In progress' : 'Completed'}
+                      {entry.status === "in-progress"
+                        ? "In progress"
+                        : "Completed"}
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-medium">{entry.hours}h</p>
-                  {entry.status === 'in-progress' && (
+                  {entry.status === "in-progress" && (
                     <p className="text-xs text-primary">Active</p>
                   )}
                 </div>
@@ -299,10 +349,15 @@ export default function Dashboard() {
                   <div>
                     <p className="text-sm font-medium">{member.name}</p>
                     <div className="flex items-center gap-1">
-                      <div className={`h-1.5 w-1.5 rounded-full ${
-                        member.status === 'working' ? 'bg-success' :
-                        member.status === 'break' ? 'bg-warning' : 'bg-muted-foreground'
-                      }`} />
+                      <div
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          member.status === "working"
+                            ? "bg-success"
+                            : member.status === "break"
+                              ? "bg-warning"
+                              : "bg-muted-foreground"
+                        }`}
+                      />
                       <p className="text-xs text-muted-foreground capitalize">
                         {member.status}
                       </p>
@@ -333,10 +388,14 @@ export default function Dashboard() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge variant={request.status === 'pending' ? 'secondary' : 'default'}>
+                  <Badge
+                    variant={
+                      request.status === "pending" ? "secondary" : "default"
+                    }
+                  >
                     {request.status}
                   </Badge>
-                  {request.status === 'pending' && (
+                  {request.status === "pending" && (
                     <div className="flex gap-1">
                       <Button size="sm" variant="outline" className="h-6 px-2">
                         <CheckCircle className="h-3 w-3" />
