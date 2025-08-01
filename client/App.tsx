@@ -30,6 +30,7 @@ import Settings from "./pages/Settings";
 import Attendance from "./pages/Attendance";
 import Timesheets from "./pages/Timesheets";
 import TeamManagement from "./pages/TeamManagement";
+import Payroll from "./pages/Payroll";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 
