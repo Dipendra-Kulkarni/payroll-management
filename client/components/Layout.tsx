@@ -15,7 +15,8 @@ import {
   Home,
   ClipboardList,
   UserCheck,
-  FileText
+  FileText,
+  DollarSign
 } from 'lucide-react';
 
 interface LayoutProps {
