@@ -27,6 +27,9 @@ import Schedule from "./pages/Schedule";
 import LeaveManagement from "./pages/LeaveManagement";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import Attendance from "./pages/Attendance";
+import Timesheets from "./pages/Timesheets";
+import TeamManagement from "./pages/TeamManagement";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 
