@@ -81,12 +81,7 @@ export function Layout({ children }: LayoutProps) {
             
             <div className="flex items-center gap-x-4 lg:gap-x-6">
               {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-5 w-5" />
-                <Badge className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">
-                  3
-                </Badge>
-              </Button>
+              <NotificationSystem />
 
               {/* User menu */}
               <div className="flex items-center gap-x-2">
