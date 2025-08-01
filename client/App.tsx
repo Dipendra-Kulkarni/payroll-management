@@ -47,46 +47,10 @@ const App = () => (
             <Route path="/clock" element={<TimeClock />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/leave" element={<LeaveManagement />} />
-            <Route path="/team" element={
-              <PlaceholderPage
-                title="Team Management"
-                description="Manage team members and roles"
-                features={[
-                  "Employee directory",
-                  "Role and permission management",
-                  "Team hierarchy",
-                  "Employee profiles",
-                  "Department organization"
-                ]}
-              />
-            } />
+            <Route path="/team" element={<TeamManagement />} />
             <Route path="/reports" element={<Reports />} />
-            <Route path="/attendance" element={
-              <PlaceholderPage
-                title="Attendance Tracking"
-                description="Monitor and track employee attendance"
-                features={[
-                  "Daily attendance overview",
-                  "Absence tracking",
-                  "Late arrival notifications",
-                  "Attendance patterns",
-                  "Compliance monitoring"
-                ]}
-              />
-            } />
-            <Route path="/timesheets" element={
-              <PlaceholderPage
-                title="Timesheet Management"
-                description="Review and approve employee timesheets"
-                features={[
-                  "Timesheet submission",
-                  "Manager review and approval",
-                  "Project time allocation",
-                  "Billing integration",
-                  "Timesheet corrections"
-                ]}
-              />
-            } />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/timesheets" element={<Timesheets />} />
             <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
