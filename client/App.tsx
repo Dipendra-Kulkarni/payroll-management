@@ -83,19 +83,7 @@ const App = () => (
                 ]}
               />
             } />
-            <Route path="/settings" element={
-              <PlaceholderPage
-                title="Settings"
-                description="Configure system settings and preferences"
-                features={[
-                  "Company settings",
-                  "User preferences",
-                  "Notification settings",
-                  "Integration management",
-                  "Security settings"
-                ]}
-              />
-            } />
+            <Route path="/settings" element={<Settings />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
