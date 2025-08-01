@@ -1,4 +1,5 @@
 import "./global.css";
+import React from "react";
 
 // Suppress Recharts defaultProps warnings
 const originalWarn = console.warn;
