@@ -25,6 +25,7 @@ import TimeClock from "./pages/TimeClock";
 import Schedule from "./pages/Schedule";
 import LeaveManagement from "./pages/LeaveManagement";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 
