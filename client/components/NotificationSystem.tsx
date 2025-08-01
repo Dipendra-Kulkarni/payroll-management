@@ -271,16 +271,16 @@ export function NotificationSystem() {
                             
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center justify-between mb-1">
-                                <p className={`text-sm font-medium truncate ${
+                                <div className={`text-sm font-medium truncate flex items-center gap-2 ${
                                   !notification.read ? 'text-foreground' : 'text-muted-foreground'
                                 }`}>
-                                  {notification.title}
+                                  <span>{notification.title}</span>
                                   {notification.urgent && (
-                                    <Badge variant="destructive" className="ml-2 h-4 text-xs">
+                                    <Badge variant="destructive" className="h-4 text-xs">
                                       Urgent
                                     </Badge>
                                   )}
-                                </p>
+                                </div>
                                 <Button
                                   variant="ghost"
                                   size="sm"
