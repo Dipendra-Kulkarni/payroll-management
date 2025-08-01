@@ -48,6 +48,7 @@ const App = () => (
             <Route path="/clock" element={<TimeClock />} />
             <Route path="/schedule" element={<Schedule />} />
             <Route path="/leave" element={<LeaveManagement />} />
+            <Route path="/payroll" element={<Payroll />} />
             <Route path="/team" element={<TeamManagement />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/attendance" element={<Attendance />} />
