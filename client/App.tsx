@@ -9,6 +9,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import Dashboard from "./pages/Dashboard";
 import TimeClock from "./pages/TimeClock";
+import Schedule from "./pages/Schedule";
+import LeaveManagement from "./pages/LeaveManagement";
+import Reports from "./pages/Reports";
 import PlaceholderPage from "./pages/PlaceholderPage";
 import NotFound from "./pages/NotFound";
 
@@ -24,32 +27,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/clock" element={<TimeClock />} />
-            <Route path="/schedule" element={
-              <PlaceholderPage
-                title="Schedule Management"
-                description="Manage employee schedules and shifts"
-                features={[
-                  "Create and edit employee schedules",
-                  "Shift planning and rotation",
-                  "Schedule templates",
-                  "Availability management",
-                  "Schedule conflicts detection"
-                ]}
-              />
-            } />
-            <Route path="/leave" element={
-              <PlaceholderPage
-                title="Leave Management"
-                description="Handle leave requests and approvals"
-                features={[
-                  "Submit leave requests",
-                  "Manager approval workflow",
-                  "Leave balance tracking",
-                  "Holiday calendar",
-                  "Leave policy management"
-                ]}
-              />
-            } />
+            <Route path="/schedule" element={<Schedule />} />
+            <Route path="/leave" element={<LeaveManagement />} />
             <Route path="/team" element={
               <PlaceholderPage
                 title="Team Management"
@@ -63,19 +42,7 @@ const App = () => (
                 ]}
               />
             } />
-            <Route path="/reports" element={
-              <PlaceholderPage
-                title="Reports & Analytics"
-                description="Generate detailed reports and analytics"
-                features={[
-                  "Attendance reports",
-                  "Time tracking analytics",
-                  "Productivity insights",
-                  "Export capabilities",
-                  "Custom report builder"
-                ]}
-              />
-            } />
+            <Route path="/reports" element={<Reports />} />
             <Route path="/attendance" element={
               <PlaceholderPage
                 title="Attendance Tracking"
