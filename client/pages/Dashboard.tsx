@@ -16,7 +16,8 @@ import {
   Timer,
   Coffee,
   MapPin,
-  ChevronRight
+  ChevronRight,
+  DollarSign
 } from 'lucide-react';
 
 const timeEntries = [
