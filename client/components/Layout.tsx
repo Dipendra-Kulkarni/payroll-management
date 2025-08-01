@@ -29,6 +29,7 @@ const navigation = [
   { name: 'Schedule', href: '/schedule', icon: Calendar },
   { name: 'Leave Requests', href: '/leave', icon: ClipboardList },
   { name: 'Payroll', href: '/payroll', icon: DollarSign },
+  { name: 'Employee Portal', href: '/employee-portal', icon: User },
   { name: 'Team', href: '/team', icon: Users },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Attendance', href: '/attendance', icon: UserCheck },
